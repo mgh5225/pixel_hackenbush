@@ -1,0 +1,27 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "pixel_hackenbush.tsx": {
+            "scaleInEditor": 1
+        },
+        "pixel_hackenbush_decoration.tsx": {
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "/home/patrick/Documents/Projects/pixel_hackenbush/assets/images/14-TileSets",
+    "map.lastUsedFormat": "tmx",
+    "openFiles": [
+    ],
+    "project": "pixel_hackenbush.tiled-project",
+    "recentFiles": [
+        "pixel_hackenbush.tsx",
+        "pixel_hackenbush_decoration.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
