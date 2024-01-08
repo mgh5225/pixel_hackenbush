@@ -1,5 +1,5 @@
 name: pixel_hackenbush
-description: "A new Flutter project."
+description: "Pixel Hackenbush"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -62,6 +62,7 @@ flutter:
   assets:
     - assets/images/14-TileSets/
     - assets/images/01-King Human/
+    - assets/images/HUD/
     - assets/tiles/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
