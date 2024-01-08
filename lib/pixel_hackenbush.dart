@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:pixel_hackenbush/actors/player.dart';
-import 'package:pixel_hackenbush/levels/level.dart';
+import 'package:pixel_hackenbush/components/player.dart';
+import 'package:pixel_hackenbush/components/level.dart';
 
 class PixelHackenbush extends FlameGame
     with HasKeyboardHandlerComponents, DragCallbacks {

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:pixel_hackenbush/actors/player.dart';
+import 'package:pixel_hackenbush/components/player.dart';
 
 class Level extends World {
   final String levelName;
