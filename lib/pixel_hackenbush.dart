@@ -16,7 +16,7 @@ class PixelHackenbush extends FlameGame
 
   Player player = Player(character: '01-King Human');
   late JoystickComponent joystick;
-  bool showJoystick = true;
+  bool showJoystick = false;
 
   @override
   FutureOr<void> onLoad() async {

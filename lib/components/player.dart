@@ -12,9 +12,7 @@ enum PlayerState { idle, run, jump, fall }
 class Player extends SpriteAnimationGroupComponent
     with HasGameRef<PixelHackenbush>, KeyboardHandler, CollisionCallbacks {
   final String character;
-  Player({required this.character, position}) : super(position: position) {
-    debugMode = true;
-  }
+  Player({required this.character, position}) : super(position: position);
 
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation runAnimation;
@@ -88,6 +86,10 @@ class Player extends SpriteAnimationGroupComponent
         case CollisionBlockType.ground:
           if (velocity.y > 0) {
             isOnGround = true;
+            position.y = other.y;
+          }
+          if (velocity.y < 0) {
+            position.y = other.y + other.height + hitbox.height;
           }
           velocity.y = 0;
           break;
@@ -193,10 +195,8 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   void _applyGravity(double dt) {
-    if (!isOnGround) {
-      velocity.y += _gravity;
-      velocity.y = velocity.y.clamp(-_jumpForce, _terminalVelocity);
-      position.y += velocity.y * dt;
-    }
+    velocity.y += _gravity;
+    velocity.y = velocity.y.clamp(-_jumpForce, _terminalVelocity);
+    position.y += velocity.y * dt;
   }
 }
