@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
+import 'package:pixel_hackenbush/components/collision_block.dart';
 import 'package:pixel_hackenbush/components/player.dart';
 
 class Level extends World {
@@ -19,15 +20,48 @@ class Level extends World {
 
     final spawnPointsLayer = level.tileMap.getLayer<ObjectGroup>('SpawnPoints');
 
-    for (final spawnPoint in spawnPointsLayer!.objects) {
-      switch (spawnPoint.class_) {
-        case 'Player':
-          player.position = Vector2(
-            spawnPoint.x,
-            spawnPoint.y,
-          );
-          add(player);
-          break;
+    if (spawnPointsLayer != null) {
+      for (final spawnPoint in spawnPointsLayer.objects) {
+        switch (spawnPoint.class_) {
+          case 'Player':
+            player.position = Vector2(
+              spawnPoint.x,
+              spawnPoint.y,
+            );
+            add(player);
+            break;
+        }
+      }
+    }
+
+    final collisionsLayer = level.tileMap.getLayer<ObjectGroup>('Collisions');
+
+    if (collisionsLayer != null) {
+      for (final collision in collisionsLayer.objects) {
+        switch (collision.class_) {
+          case 'Platform':
+            final platform = CollisionBlock(
+              position: Vector2(collision.x, collision.y),
+              size: Vector2(collision.width, collision.height),
+              blockType: CollisionBlockType.platform,
+            );
+            add(platform);
+            break;
+          case 'Wall':
+            final wall = CollisionBlock(
+              position: Vector2(collision.x, collision.y),
+              size: Vector2(collision.width, collision.height),
+              blockType: CollisionBlockType.wall,
+            );
+            add(wall);
+            break;
+          default:
+            final block = CollisionBlock(
+              position: Vector2(collision.x, collision.y),
+              size: Vector2(collision.width, collision.height),
+            );
+            add(block);
+        }
       }
     }
 

@@ -8,7 +8,7 @@ import 'package:pixel_hackenbush/components/player.dart';
 import 'package:pixel_hackenbush/components/level.dart';
 
 class PixelHackenbush extends FlameGame
-    with HasKeyboardHandlerComponents, DragCallbacks {
+    with HasKeyboardHandlerComponents, DragCallbacks, HasCollisionDetection {
   late final CameraComponent cam;
 
   @override
