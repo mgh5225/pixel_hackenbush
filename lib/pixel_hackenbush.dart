@@ -12,9 +12,9 @@ class PixelHackenbush extends FlameGame
   late final CameraComponent cam;
 
   @override
-  Color backgroundColor() => const Color(0xff3f3851);
+  Color backgroundColor() => const Color(0xff33323d);
 
-  Player player = Player(character: '01-King Human');
+  Player player = Player(character: 'Character');
   late JoystickComponent joystick;
   bool showJoystick = false;
 

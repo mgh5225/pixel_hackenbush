@@ -7,14 +7,40 @@
     "expandedProjectPaths": [
         "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "Background.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Platforms (32x32).tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Terrain (32x32).tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Terrain and Back Wall (32x32).tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "level01.tmx": {
             "scale": 1,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 376.5,
-                "y": 375
+                "x": 245.5,
+                "y": 507
             }
+        },
+        "level01.tmx#pixel_hackenbush_decoration": {
+            "scaleInDock": 1
         },
         "pixel_hackenbush.tsx": {
             "scaleInDock": 0.5,
@@ -25,16 +51,25 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "/home/patrick/Documents/Projects/pixel_hackenbush/assets/images/14-TileSets",
+    "last.imagePath": "/home/patrick/Documents/Projects/pixel_hackenbush/assets/images/Backgrounds",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
-        "level01.tmx"
+        "level01.tmx",
+        "Terrain (32x32).tsx",
+        "Terrain and Back Wall (32x32).tsx",
+        "Platforms (32x32).tsx",
+        "Background.tsx"
     ],
     "project": "pixel_hackenbush.tiled-project",
     "recentFiles": [
+        "Background.tsx",
+        "Platforms (32x32).tsx",
+        "Terrain and Back Wall (32x32).tsx",
+        "Terrain (32x32).tsx",
         "level01.tmx",
         "pixel_hackenbush.tsx",
         "pixel_hackenbush_decoration.tsx"
     ],
-    "tileset.lastUsedFormat": "tsx"
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.type": 1
 }

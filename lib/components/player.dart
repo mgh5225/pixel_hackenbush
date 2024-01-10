@@ -4,10 +4,10 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 import 'package:pixel_hackenbush/components/collision_block.dart';
-import 'package:pixel_hackenbush/components/player_hitbox.dart';
+import 'package:pixel_hackenbush/components/hitbox.dart';
 import 'package:pixel_hackenbush/pixel_hackenbush.dart';
 
-enum PlayerState { idle, run, jump, fall }
+enum PlayerState { idle, run, jump, fall, attack }
 
 class Player extends SpriteAnimationGroupComponent
     with HasGameRef<PixelHackenbush>, KeyboardHandler, CollisionCallbacks {
@@ -18,7 +18,8 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation runAnimation;
   late final SpriteAnimation jumpAnimation;
   late final SpriteAnimation fallAnimation;
-  final double stepTime = 0.075;
+  late final SpriteAnimation attackAnimation;
+  final double stepTime = 0.05;
 
   final double _gravity = 9.8;
   final double _jumpForce = 460;
@@ -29,9 +30,10 @@ class Player extends SpriteAnimationGroupComponent
   Vector2 velocity = Vector2.zero();
   bool isOnGround = false;
   bool hasJumped = false;
-  PlayerHitbox hitbox = PlayerHitbox(
-    offsetX: 20,
-    offsetY: 20,
+  bool hasAttacked = false;
+  RectHitbox hitbox = RectHitbox(
+    offsetX: 18,
+    offsetY: 5,
     width: 20,
     height: 25,
   );
@@ -46,7 +48,7 @@ class Player extends SpriteAnimationGroupComponent
 
     anchor = Anchor(
       (hitbox.width / 2 + hitbox.offsetX) / width,
-      (hitbox.height + hitbox.offsetX) / height,
+      (hitbox.height + hitbox.offsetY) / height,
     );
 
     return super.onLoad();
@@ -56,9 +58,7 @@ class Player extends SpriteAnimationGroupComponent
   void update(double dt) {
     _updatePlayerState();
     _updatePlayerMovement(dt);
-    // _checkHorizontalCollisions();
     _applyGravity(dt);
-    // _checkVerticalCollisions();
     super.update(dt);
   }
 
@@ -75,6 +75,7 @@ class Player extends SpriteAnimationGroupComponent
     horizontalMovement += isRightKeyPressed ? 1 : 0;
 
     hasJumped = keysPressed.contains(LogicalKeyboardKey.space);
+    hasAttacked = keysPressed.contains(LogicalKeyboardKey.enter);
 
     return super.onKeyEvent(event, keysPressed);
   }
@@ -124,16 +125,18 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   void _loadAllAnimations() {
-    idleAnimation = _spriteAnimation('Idle', Vector2(78, 58), 11);
-    runAnimation = _spriteAnimation('Run', Vector2(78, 58), 8);
-    jumpAnimation = _spriteAnimation('Jump', Vector2(78, 58), 1);
-    fallAnimation = _spriteAnimation('Fall', Vector2(78, 58), 1);
+    idleAnimation = _spriteAnimation('Idle', Vector2(64, 40), 5);
+    runAnimation = _spriteAnimation('Run', Vector2(64, 40), 6);
+    jumpAnimation = _spriteAnimation('Jump', Vector2(64, 40), 3, loop: false);
+    fallAnimation = _spriteAnimation('Fall', Vector2(64, 40), 1);
+    attackAnimation = _spriteAnimation('Attack 1', Vector2(64, 40), 3);
 
     animations = {
       PlayerState.idle: idleAnimation,
       PlayerState.run: runAnimation,
       PlayerState.jump: jumpAnimation,
       PlayerState.fall: fallAnimation,
+      PlayerState.attack: attackAnimation,
     };
 
     current = PlayerState.idle;
@@ -142,17 +145,16 @@ class Player extends SpriteAnimationGroupComponent
   SpriteAnimation _spriteAnimation(
     String state,
     Vector2 textureSize,
-    int amount,
-  ) {
+    int amount, {
+    bool loop = true,
+  }) {
     return SpriteAnimation.fromFrameData(
-      game.images.fromCache(
-        '$character/$state (${textureSize.x.toInt()}x${textureSize.y.toInt()}).png',
-      ),
+      game.images.fromCache('$character/$state.png'),
       SpriteAnimationData.sequenced(
-        amount: amount,
-        stepTime: stepTime,
-        textureSize: textureSize,
-      ),
+          amount: amount,
+          stepTime: stepTime,
+          textureSize: textureSize,
+          loop: loop),
     );
   }
 
@@ -189,6 +191,10 @@ class Player extends SpriteAnimationGroupComponent
 
     if (velocity.y < 0) {
       playerState = PlayerState.jump;
+    }
+
+    if (hasAttacked) {
+      playerState = PlayerState.attack;
     }
 
     current = playerState;

@@ -60,9 +60,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/14-TileSets/
-    - assets/images/01-King Human/
+    - assets/images/Character/
+    - assets/images/Dust Particles/
+    - assets/images/Terrains/
+    - assets/images/Totems/
     - assets/images/HUD/
+    - assets/images/Backgrounds/
     - assets/tiles/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
