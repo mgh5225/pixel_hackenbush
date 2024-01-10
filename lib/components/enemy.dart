@@ -80,6 +80,8 @@ class Enemy extends SpriteAnimationGroupComponent
     };
 
     current = EnemyState.idle;
+
+    animationTickers?[EnemyState.hit]?.onComplete = () => kill();
   }
 
   SpriteAnimation _spriteAnimation(
@@ -139,5 +141,13 @@ class Enemy extends SpriteAnimationGroupComponent
         );
         break;
     }
+  }
+
+  void hit() {
+    current = EnemyState.hit;
+  }
+
+  void kill() {
+    removeFromParent();
   }
 }

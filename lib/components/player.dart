@@ -1,13 +1,26 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/geometry.dart';
 import 'package:flutter/services.dart';
 import 'package:pixel_hackenbush/components/collision_block.dart';
+import 'package:pixel_hackenbush/components/enemy.dart';
 import 'package:pixel_hackenbush/components/hitbox.dart';
 import 'package:pixel_hackenbush/pixel_hackenbush.dart';
 
-enum PlayerState { idle, run, jump, fall, attack }
+enum PlayerState {
+  idle,
+  run,
+  jump,
+  fall,
+  attack1,
+  attack2,
+  attack3,
+  airAttack1,
+  airAttack2,
+}
 
 class Player extends SpriteAnimationGroupComponent
     with HasGameRef<PixelHackenbush>, KeyboardHandler, CollisionCallbacks {
@@ -18,12 +31,17 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation runAnimation;
   late final SpriteAnimation jumpAnimation;
   late final SpriteAnimation fallAnimation;
-  late final SpriteAnimation attackAnimation;
+  late final SpriteAnimation attack1Animation;
+  late final SpriteAnimation attack2Animation;
+  late final SpriteAnimation attack3Animation;
+  late final SpriteAnimation airAttack1Animation;
+  late final SpriteAnimation airAttack2Animation;
   final double stepTime = 0.05;
 
   final double _gravity = 9.8;
   final double _jumpForce = 300;
   final double _terminalVelocity = 300;
+  final double _attackRange = 20;
 
   double horizontalMovement = 0.0;
   double moveSpeed = 100;
@@ -31,6 +49,8 @@ class Player extends SpriteAnimationGroupComponent
   bool isOnGround = false;
   bool hasJumped = false;
   bool hasAttacked = false;
+  bool canAttack = true;
+  bool canChangeAnimation = true;
   RectHitbox hitbox = RectHitbox(
     offsetX: 25,
     offsetY: 10,
@@ -50,6 +70,8 @@ class Player extends SpriteAnimationGroupComponent
       (hitbox.width / 2 + hitbox.offsetX) / width,
       (hitbox.height + hitbox.offsetY) / height,
     );
+
+    priority = 1;
 
     return super.onLoad();
   }
@@ -76,6 +98,7 @@ class Player extends SpriteAnimationGroupComponent
 
     hasJumped = keysPressed.contains(LogicalKeyboardKey.space);
     hasAttacked = keysPressed.contains(LogicalKeyboardKey.enter);
+    canAttack = canAttack || !keysPressed.contains(LogicalKeyboardKey.enter);
 
     return super.onKeyEvent(event, keysPressed);
   }
@@ -151,17 +174,66 @@ class Player extends SpriteAnimationGroupComponent
     runAnimation = _spriteAnimation('Run', Vector2(64, 40), 6);
     jumpAnimation = _spriteAnimation('Jump', Vector2(64, 40), 3, loop: false);
     fallAnimation = _spriteAnimation('Fall', Vector2(64, 40), 1);
-    attackAnimation = _spriteAnimation('Attack 1', Vector2(64, 40), 3);
+    attack1Animation = _spriteAnimation(
+      'Attack 1',
+      Vector2(64, 40),
+      3,
+      loop: false,
+    );
+    attack2Animation = _spriteAnimation(
+      'Attack 2',
+      Vector2(64, 40),
+      3,
+      loop: false,
+    );
+    attack3Animation = _spriteAnimation(
+      'Attack 3',
+      Vector2(64, 40),
+      3,
+      loop: false,
+    );
+    airAttack1Animation = _spriteAnimation(
+      'Air Attack 1',
+      Vector2(64, 40),
+      3,
+      loop: false,
+    );
+    airAttack2Animation = _spriteAnimation(
+      'Air Attack 2',
+      Vector2(64, 40),
+      3,
+      loop: false,
+    );
 
     animations = {
       PlayerState.idle: idleAnimation,
       PlayerState.run: runAnimation,
       PlayerState.jump: jumpAnimation,
       PlayerState.fall: fallAnimation,
-      PlayerState.attack: attackAnimation,
+      PlayerState.attack1: attack1Animation,
+      PlayerState.attack2: attack2Animation,
+      PlayerState.attack3: attack3Animation,
+      PlayerState.airAttack1: airAttack1Animation,
+      PlayerState.airAttack2: airAttack2Animation,
     };
 
     current = PlayerState.idle;
+
+    animationTickers?[PlayerState.attack1]?.onStart = () => _onAttackStart();
+    animationTickers?[PlayerState.attack2]?.onStart = () => _onAttackStart();
+    animationTickers?[PlayerState.attack3]?.onStart = () => _onAttackStart();
+    animationTickers?[PlayerState.airAttack1]?.onStart = () => _onAttackStart();
+    animationTickers?[PlayerState.airAttack2]?.onStart = () => _onAttackStart();
+    animationTickers?[PlayerState.attack1]?.onComplete =
+        () => _onAttackCompleted();
+    animationTickers?[PlayerState.attack2]?.onComplete =
+        () => _onAttackCompleted();
+    animationTickers?[PlayerState.attack3]?.onComplete =
+        () => _onAttackCompleted();
+    animationTickers?[PlayerState.airAttack1]?.onComplete =
+        () => _onAttackCompleted();
+    animationTickers?[PlayerState.airAttack2]?.onComplete =
+        () => _onAttackCompleted();
   }
 
   SpriteAnimation _spriteAnimation(
@@ -215,16 +287,60 @@ class Player extends SpriteAnimationGroupComponent
       playerState = PlayerState.jump;
     }
 
-    if (hasAttacked) {
-      playerState = PlayerState.attack;
+    if (hasAttacked && canAttack) {
+      final random = Random();
+      if (isOnGround) {
+        playerState = [
+          PlayerState.attack1,
+          PlayerState.attack2,
+          PlayerState.attack3,
+        ][random.nextInt(3)];
+      } else {
+        playerState = [
+          PlayerState.airAttack1,
+          PlayerState.airAttack2,
+        ][random.nextInt(2)];
+      }
+      _checkForwardRay();
     }
 
-    current = playerState;
+    if (canChangeAnimation) current = playerState;
   }
 
   void _applyGravity(double dt) {
     velocity.y += _gravity;
     velocity.y = velocity.y.clamp(-_jumpForce, _terminalVelocity);
     position.y += velocity.y * dt;
+  }
+
+  void _checkForwardRay() {
+    final forwardRay = Ray2(
+      origin: absoluteCenter + Vector2(scale.x.sign * hitbox.width, 0),
+      direction: scale.x > 0 ? Vector2(1, 0) : Vector2(-1, 0),
+    );
+
+    final result = game.collisionDetection.raycast(
+      forwardRay,
+      maxDistance: _attackRange,
+    );
+
+    if (result != null && result.hitbox != null) {
+      final hitbox = result.hitbox;
+      final object = hitbox?.parent;
+
+      if (object is Enemy) {
+        object.hit();
+      }
+    }
+  }
+
+  void _onAttackStart() {
+    canChangeAnimation = false;
+    canAttack = false;
+  }
+
+  void _onAttackCompleted() {
+    canChangeAnimation = true;
+    canAttack = !hasAttacked;
   }
 }
