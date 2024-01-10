@@ -21,7 +21,7 @@ class PixelHackenbush extends FlameGame
   late JoystickComponent joystick;
   late HudButtonComponent jumpButton;
   late HudButtonComponent attackButton;
-  bool showControls = true;
+  bool showControls = false;
 
   @override
   FutureOr<void> onLoad() async {
@@ -88,7 +88,6 @@ class PixelHackenbush extends FlameGame
       case JoystickDirection.upRight:
       case JoystickDirection.downRight:
         player.horizontalMovement = 1;
-
         break;
       default:
         player.horizontalMovement = 0;

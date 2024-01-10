@@ -106,14 +106,6 @@ class Level extends World {
             );
             add(platform);
             break;
-          case 'Wall':
-            final wall = CollisionBlock(
-              position: Vector2(collision.x, collision.y),
-              size: Vector2(collision.width, collision.height),
-              blockType: CollisionBlockType.wall,
-            );
-            add(wall);
-            break;
           default:
             final block = CollisionBlock(
               position: Vector2(collision.x, collision.y),

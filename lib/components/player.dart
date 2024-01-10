@@ -22,7 +22,7 @@ class Player extends SpriteAnimationGroupComponent
   final double stepTime = 0.05;
 
   final double _gravity = 9.8;
-  final double _jumpForce = 460;
+  final double _jumpForce = 300;
   final double _terminalVelocity = 300;
 
   double horizontalMovement = 0.0;
@@ -32,10 +32,10 @@ class Player extends SpriteAnimationGroupComponent
   bool hasJumped = false;
   bool hasAttacked = false;
   RectHitbox hitbox = RectHitbox(
-    offsetX: 18,
-    offsetY: 5,
-    width: 20,
-    height: 25,
+    offsetX: 25,
+    offsetY: 10,
+    width: 15,
+    height: 20,
   );
 
   @override
@@ -84,24 +84,51 @@ class Player extends SpriteAnimationGroupComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is CollisionBlock) {
       switch (other.blockType) {
-        case CollisionBlockType.ground:
-          if (velocity.y > 0) {
+        case CollisionBlockType.platform:
+          if (velocity.y > 0 &&
+              other.isCollidedFromTop(
+                this,
+                intersectionPoints,
+              )) {
             isOnGround = true;
             position.y = other.y;
+            velocity.y = 0;
           }
-          if (velocity.y < 0) {
-            position.y = other.y + other.height + hitbox.height;
-          }
-          velocity.y = 0;
           break;
-        case CollisionBlockType.wall:
-          if (velocity.x > 0) {
+        case CollisionBlockType.ground:
+          if (velocity.x > 0 &&
+              other.isCollidedFromLeft(
+                this,
+                intersectionPoints,
+              )) {
             position.x = other.x - hitbox.width / 2;
+            velocity.x = 0;
           }
-          if (velocity.x < 0) {
+          if (velocity.x < 0 &&
+              other.isCollidedFromRight(
+                this,
+                intersectionPoints,
+              )) {
             position.x = other.x + other.width + hitbox.width / 2;
+            velocity.x = 0;
           }
-          velocity.x = 0;
+          if (velocity.y > 0 &&
+              other.isCollidedFromTop(
+                this,
+                intersectionPoints,
+              )) {
+            isOnGround = true;
+            position.y = other.y;
+            velocity.y = 0;
+          }
+          if (velocity.y < 0 &&
+              other.isCollidedFromBottom(
+                this,
+                intersectionPoints,
+              )) {
+            position.y = other.y + other.height + hitbox.height;
+            velocity.y = 0;
+          }
           break;
         default:
       }
@@ -113,12 +140,7 @@ class Player extends SpriteAnimationGroupComponent
   @override
   void onCollisionEnd(PositionComponent other) {
     if (other is CollisionBlock) {
-      switch (other.blockType) {
-        case CollisionBlockType.ground:
-          isOnGround = false;
-          break;
-        default:
-      }
+      isOnGround = false;
     }
 
     super.onCollisionEnd(other);
