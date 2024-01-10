@@ -3,12 +3,18 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:pixel_hackenbush/components/collision_block.dart';
+import 'package:pixel_hackenbush/components/enemy.dart';
 import 'package:pixel_hackenbush/components/player.dart';
 
 class Level extends World {
   final String levelName;
   final Player player;
-  Level({required this.levelName, required this.player});
+  final List<Enemy> enemies;
+  Level({
+    required this.levelName,
+    required this.player,
+    required this.enemies,
+  });
 
   late TiledComponent level;
 
@@ -36,6 +42,50 @@ class Level extends World {
               spawnPoint.y,
             );
             add(player);
+            break;
+          case 'Enemy':
+            final enemyTypeStr = spawnPoint.properties.getValue<String>('Type');
+            final enemyPositionTypeStr =
+                spawnPoint.properties.getValue<String>('Position');
+
+            EnemyType enemyType;
+            EnemyPositionType enemyPositionType;
+
+            switch (enemyTypeStr) {
+              case 'Head 1':
+                enemyType = EnemyType.head_1;
+                break;
+              case 'Head 2':
+                enemyType = EnemyType.head_2;
+                break;
+              case 'Head 3':
+                enemyType = EnemyType.head_3;
+                break;
+              default:
+                enemyType = EnemyType.head_1;
+            }
+
+            switch (enemyPositionTypeStr) {
+              case 'Head':
+                enemyPositionType = EnemyPositionType.head;
+                break;
+              case 'Middle':
+                enemyPositionType = EnemyPositionType.middle;
+                break;
+              default:
+                enemyPositionType = EnemyPositionType.head;
+            }
+
+            final enemy = Enemy(
+              enemyType: enemyType,
+              enemyPositionType: enemyPositionType,
+              position: Vector2(
+                spawnPoint.x,
+                spawnPoint.y,
+              ),
+            );
+            enemies.add(enemy);
+            add(enemy);
             break;
         }
       }

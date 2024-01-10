@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="58">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="98">
  <tileset firstgid="1" source="Background.tsx"/>
  <tileset firstgid="20" source="Terrain (32x32).tsx"/>
+ <tileset firstgid="105" source="Platforms (32x32).tsx"/>
  <layer id="2" name="Background" width="30" height="20">
   <data encoding="csv">
 38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,
@@ -74,7 +75,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="6" name="Objects" width="30" height="20" visible="0">
+ <layer id="6" name="Objects" width="30" height="20" offsetx="32" offsety="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -89,7 +90,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,118,119,120,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -100,9 +101,52 @@
  </layer>
  <objectgroup id="4" name="SpawnPoints">
   <object id="3" name="Player" type="Player" x="160" y="416" width="58" height="58"/>
-  <object id="54" name="Stick" type="Stick" x="640" y="448" width="22" height="79" rotation="180">
+  <object id="63" name="Enemy" type="Enemy" x="544" y="420" width="20" height="20">
    <properties>
-    <property name="Type" value="Blue"/>
+    <property name="Position" value="Middle"/>
+    <property name="Type" value="Head 3"/>
+   </properties>
+  </object>
+  <object id="64" name="Enemy" type="Enemy" x="544" y="400" width="20" height="20">
+   <properties>
+    <property name="Position" value="Top"/>
+    <property name="Type" value="Head 2"/>
+   </properties>
+  </object>
+  <object id="67" name="Enemy" type="Enemy" x="544" y="440" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="Type" value="Head 2"/>
+   </properties>
+  </object>
+  <object id="68" name="Enemy" type="Enemy" x="544" y="460" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="Type" value="Head 3"/>
+   </properties>
+  </object>
+  <object id="76" name="Enemy" type="Enemy" x="608" y="420" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="Type" value="Head 2"/>
+   </properties>
+  </object>
+  <object id="77" name="Enemy" type="Enemy" x="608" y="400" width="20" height="20">
+   <properties>
+    <property name="Position" value="Top"/>
+    <property name="Type" value="Head 3"/>
+   </properties>
+  </object>
+  <object id="78" name="Enemy" type="Enemy" x="608" y="440" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="Type" value="Head 1"/>
+   </properties>
+  </object>
+  <object id="79" name="Enemy" type="Enemy" x="608" y="460" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="Type" value="Head 2"/>
    </properties>
   </object>
  </objectgroup>
@@ -114,5 +158,6 @@
   <object id="55" x="320" y="480" width="544" height="32"/>
   <object id="56" type="Wall" x="480" y="96" width="32" height="128"/>
   <object id="57" x="96" y="96" width="160" height="128"/>
+  <object id="96" type="Platform" x="256" y="416" width="96" height="32"/>
  </objectgroup>
 </map>

@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:pixel_hackenbush/components/enemy.dart';
 import 'package:pixel_hackenbush/components/player.dart';
 import 'package:pixel_hackenbush/components/level.dart';
 
@@ -15,8 +16,9 @@ class PixelHackenbush extends FlameGame
   Color backgroundColor() => const Color(0xff33323d);
 
   Player player = Player(character: 'Character');
+  List<Enemy> enemies = [];
   late JoystickComponent joystick;
-  bool showJoystick = false;
+  bool showJoystick = true;
 
   @override
   FutureOr<void> onLoad() async {
@@ -25,6 +27,7 @@ class PixelHackenbush extends FlameGame
     final world = Level(
       levelName: 'level01',
       player: player,
+      enemies: enemies,
     );
 
     cam = CameraComponent.withFixedResolution(

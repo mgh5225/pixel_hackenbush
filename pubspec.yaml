@@ -63,7 +63,9 @@ flutter:
     - assets/images/Character/
     - assets/images/Dust Particles/
     - assets/images/Terrains/
-    - assets/images/Totems/
+    - assets/images/Totems/Head 1/
+    - assets/images/Totems/Head 2/
+    - assets/images/Totems/Head 3/
     - assets/images/HUD/
     - assets/images/Backgrounds/
     - assets/tiles/

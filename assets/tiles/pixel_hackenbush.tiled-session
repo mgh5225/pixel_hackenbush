@@ -17,6 +17,11 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "Enemies.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "Platforms (32x32).tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1,
@@ -51,7 +56,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "/home/patrick/Documents/Projects/pixel_hackenbush/assets/images/Backgrounds",
+    "last.imagePath": "/home/patrick/Documents/Projects/pixel_hackenbush/assets/images/Totems/Head 3",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
         "level01.tmx",
@@ -62,6 +67,7 @@
     ],
     "project": "pixel_hackenbush.tiled-project",
     "recentFiles": [
+        "Enemies.tsx",
         "Background.tsx",
         "Platforms (32x32).tsx",
         "Terrain and Back Wall (32x32).tsx",
