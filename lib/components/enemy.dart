@@ -132,7 +132,7 @@ class Enemy extends SpriteAnimationGroupComponent
         break;
       case EnemyType.head_3:
         hitbox = RectHitbox(
-          offsetX: 5,
+          offsetX: 6,
           offsetY: 10,
           width: 20,
           height: 20,

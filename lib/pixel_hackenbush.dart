@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' show Platform;
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -21,7 +22,7 @@ class PixelHackenbush extends FlameGame
   late JoystickComponent joystick;
   late HudButtonComponent jumpButton;
   late HudButtonComponent attackButton;
-  bool showControls = false;
+  bool showControls = Platform.isAndroid;
 
   @override
   FutureOr<void> onLoad() async {
