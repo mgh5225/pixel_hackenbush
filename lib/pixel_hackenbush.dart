@@ -105,6 +105,7 @@ class PixelHackenbush extends FlameGame
       margin: const EdgeInsets.only(right: 100, bottom: 100),
       onPressed: () => player.hasJumped = true,
       onReleased: () => player.hasJumped = false,
+      onCancelled: () => player.hasJumped = false,
     );
     attackButton = HudButtonComponent(
       button: SpriteComponent(
@@ -115,6 +116,7 @@ class PixelHackenbush extends FlameGame
       margin: const EdgeInsets.only(right: 128, bottom: 72),
       onPressed: () => player.hasAttacked = true,
       onReleased: () => player.hasAttacked = false,
+      onCancelled: () => player.hasAttacked = false,
     );
 
     add(jumpButton);
