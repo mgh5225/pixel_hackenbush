@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:pixel_hackenbush/components/enemy.dart';
 import 'package:pixel_hackenbush/components/player.dart';
@@ -18,7 +19,9 @@ class PixelHackenbush extends FlameGame
   Player player = Player(character: 'Character');
   List<Enemy> enemies = [];
   late JoystickComponent joystick;
-  bool showJoystick = true;
+  late HudButtonComponent jumpButton;
+  late HudButtonComponent attackButton;
+  bool showControls = true;
 
   @override
   FutureOr<void> onLoad() async {
@@ -32,16 +35,17 @@ class PixelHackenbush extends FlameGame
 
     cam = CameraComponent.withFixedResolution(
       world: world,
-      width: 960,
-      height: 640,
+      width: 256,
+      height: 256,
     );
 
-    cam.viewfinder.anchor = Anchor.topLeft;
+    cam.follow(player, maxSpeed: 150, snap: false);
 
     addAll([cam, world]);
 
-    if (showJoystick) {
+    if (showControls) {
       _addJoystick();
+      _addMobileButtons();
     }
 
     return super.onLoad();
@@ -49,7 +53,7 @@ class PixelHackenbush extends FlameGame
 
   @override
   void update(double dt) {
-    if (showJoystick) {
+    if (showControls) {
       _readJoystick();
     }
     super.update(dt);
@@ -89,5 +93,31 @@ class PixelHackenbush extends FlameGame
       default:
         player.horizontalMovement = 0;
     }
+  }
+
+  void _addMobileButtons() {
+    jumpButton = HudButtonComponent(
+      button: SpriteComponent(
+        sprite: Sprite(
+          images.fromCache('HUD/A.png'),
+        ),
+      ),
+      margin: const EdgeInsets.only(right: 100, bottom: 100),
+      onPressed: () => player.hasJumped = true,
+      onReleased: () => player.hasJumped = false,
+    );
+    attackButton = HudButtonComponent(
+      button: SpriteComponent(
+        sprite: Sprite(
+          images.fromCache('HUD/B.png'),
+        ),
+      ),
+      margin: const EdgeInsets.only(right: 128, bottom: 72),
+      onPressed: () => player.hasAttacked = true,
+      onReleased: () => player.hasAttacked = false,
+    );
+
+    add(jumpButton);
+    add(attackButton);
   }
 }
