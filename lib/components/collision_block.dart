@@ -7,7 +7,7 @@ import 'package:pixel_hackenbush/components/player.dart';
 enum CollisionBlockType { ground, platform }
 
 class CollisionBlock extends PositionComponent {
-  CollisionBlockType blockType;
+  final CollisionBlockType blockType;
   CollisionBlock({
     position,
     size,

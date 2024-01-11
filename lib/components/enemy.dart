@@ -13,11 +13,16 @@ enum EnemyState { idle, hit }
 
 class Enemy extends SpriteAnimationGroupComponent
     with HasGameRef<PixelHackenbush>, CollisionCallbacks {
-  EnemyType enemyType;
-  EnemyPositionType enemyPositionType;
+  final int id;
+  final EnemyType enemyType;
+  final EnemyPositionType enemyPositionType;
+  final int? topId;
+
   Enemy({
+    required this.id,
     required this.enemyType,
     required this.enemyPositionType,
+    this.topId,
     position,
   }) : super(position: position);
 
@@ -25,6 +30,8 @@ class Enemy extends SpriteAnimationGroupComponent
   late final SpriteAnimation hitAnimation;
   late RectHitbox hitbox;
   final double stepTime = 0.05;
+
+  bool canHit = true;
 
   @override
   FutureOr<void> onLoad() {
@@ -144,10 +151,18 @@ class Enemy extends SpriteAnimationGroupComponent
   }
 
   void hit() {
-    current = EnemyState.hit;
+    if (canHit) {
+      current = EnemyState.hit;
+      canHit = false;
+    }
   }
 
   void kill() {
+    if (topId != null && game.enemies.containsKey(topId)) {
+      game.enemies[topId]!.hit();
+    }
+
+    game.enemies.remove(id);
     removeFromParent();
   }
 }

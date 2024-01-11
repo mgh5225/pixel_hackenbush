@@ -62,11 +62,11 @@
             "scaleInDock": 1
         },
         "menu.tmx": {
-            "scale": 1.5,
+            "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 156.33333333333331,
-                "y": 149.33333333333331
+                "x": 105.5,
+                "y": 152
             }
         },
         "pixel_hackenbush.tsx": {
@@ -90,6 +90,7 @@
         "Background.tsx"
     ],
     "project": "pixel_hackenbush.tiled-project",
+    "property.type": "int",
     "recentFiles": [
         "Buttons.tsx",
         "Big Banner (guide).tsx",

@@ -25,7 +25,7 @@ class PixelHackenbush extends FlameGame
   Color backgroundColor() => backgroundColors[PixelColors.dark]!;
 
   Player player = Player(character: 'Character');
-  List<Enemy> enemies = [];
+  Map<int, Enemy> enemies = {};
   late JoystickComponent joystick;
   late HudButtonComponent jumpButton;
   late HudButtonComponent attackButton;

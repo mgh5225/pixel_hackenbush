@@ -104,6 +104,7 @@
   <object id="63" name="Enemy" type="Enemy" x="544" y="420" width="20" height="20">
    <properties>
     <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="64"/>
     <property name="Type" value="Head 3"/>
    </properties>
   </object>
@@ -116,18 +117,21 @@
   <object id="67" name="Enemy" type="Enemy" x="544" y="440" width="20" height="20">
    <properties>
     <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="63"/>
     <property name="Type" value="Head 2"/>
    </properties>
   </object>
   <object id="68" name="Enemy" type="Enemy" x="544" y="460" width="20" height="20">
    <properties>
     <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="67"/>
     <property name="Type" value="Head 3"/>
    </properties>
   </object>
   <object id="76" name="Enemy" type="Enemy" x="608" y="420" width="20" height="20">
    <properties>
     <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="77"/>
     <property name="Type" value="Head 2"/>
    </properties>
   </object>
@@ -140,12 +144,14 @@
   <object id="78" name="Enemy" type="Enemy" x="608" y="440" width="20" height="20">
    <properties>
     <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="76"/>
     <property name="Type" value="Head 1"/>
    </properties>
   </object>
   <object id="79" name="Enemy" type="Enemy" x="608" y="460" width="20" height="20">
    <properties>
     <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="78"/>
     <property name="Type" value="Head 2"/>
    </properties>
   </object>

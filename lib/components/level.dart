@@ -9,7 +9,7 @@ import 'package:pixel_hackenbush/components/player.dart';
 class Level extends World {
   final String levelName;
   final Player player;
-  final List<Enemy> enemies;
+  final Map<int, Enemy> enemies;
   Level({
     required this.levelName,
     required this.player,
@@ -47,6 +47,7 @@ class Level extends World {
             final enemyTypeStr = spawnPoint.properties.getValue<String>('Type');
             final enemyPositionTypeStr =
                 spawnPoint.properties.getValue<String>('Position');
+            final topId = spawnPoint.properties.getValue<int>('TopID');
 
             EnemyType enemyType;
             EnemyPositionType enemyPositionType;
@@ -77,14 +78,16 @@ class Level extends World {
             }
 
             final enemy = Enemy(
+              id: spawnPoint.id,
               enemyType: enemyType,
               enemyPositionType: enemyPositionType,
               position: Vector2(
                 spawnPoint.x,
                 spawnPoint.y,
               ),
+              topId: topId,
             );
-            enemies.add(enemy);
+            enemies[spawnPoint.id] = enemy;
             add(enemy);
             break;
         }
