@@ -67,6 +67,9 @@ flutter:
     - assets/images/Totems/Head 2/
     - assets/images/Totems/Head 3/
     - assets/images/HUD/
+    - assets/images/UI/Big Banner/
+    - assets/images/UI/Yellow Button/
+    - assets/images/UI/Small Text/Small Icons/
     - assets/images/Backgrounds/
     - assets/tiles/
   #   - images/a_dot_burr.jpeg
@@ -83,17 +86,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: Minecraft
+      fonts:
+        - asset: assets/fonts/Minecraft.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

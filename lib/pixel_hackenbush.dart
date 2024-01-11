@@ -7,40 +7,43 @@ import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
 import 'package:pixel_hackenbush/components/enemy.dart';
+import 'package:pixel_hackenbush/components/menu.dart';
 import 'package:pixel_hackenbush/components/player.dart';
 import 'package:pixel_hackenbush/components/level.dart';
+
+enum PixelColors { dark }
 
 class PixelHackenbush extends FlameGame
     with HasKeyboardHandlerComponents, DragCallbacks, HasCollisionDetection {
   late final CameraComponent cam;
 
+  final backgroundColors = {
+    PixelColors.dark: const Color(0xff33323d),
+  };
+
   @override
-  Color backgroundColor() => const Color(0xff33323d);
+  Color backgroundColor() => backgroundColors[PixelColors.dark]!;
 
   Player player = Player(character: 'Character');
   List<Enemy> enemies = [];
   late JoystickComponent joystick;
   late HudButtonComponent jumpButton;
   late HudButtonComponent attackButton;
-  bool showControls = Platform.isAndroid;
+  bool showControls = false;
 
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
 
-    final world = Level(
-      levelName: 'level01',
-      player: player,
-      enemies: enemies,
-    );
+    final world = Menu(menuName: 'menu');
 
     cam = CameraComponent.withFixedResolution(
       world: world,
-      width: 256,
-      height: 256,
+      width: 320,
+      height: 320,
     );
 
-    cam.follow(player, maxSpeed: 150, snap: false);
+    cam.viewfinder.anchor = Anchor.topLeft;
 
     addAll([cam, world]);
 
@@ -103,9 +106,10 @@ class PixelHackenbush extends FlameGame
         ),
       ),
       margin: const EdgeInsets.only(right: 100, bottom: 100),
-      onPressed: () => player.hasJumped = true,
-      onReleased: () => player.hasJumped = false,
-      onCancelled: () => player.hasJumped = false,
+      onPressed: () => player.setJump(true),
+      onReleased: () => player.setJump(false),
+      onCancelled: () => player.setJump(false),
+      scale: Vector2.all(1.5),
     );
     attackButton = HudButtonComponent(
       button: SpriteComponent(
@@ -113,13 +117,37 @@ class PixelHackenbush extends FlameGame
           images.fromCache('HUD/B.png'),
         ),
       ),
-      margin: const EdgeInsets.only(right: 128, bottom: 72),
-      onPressed: () => player.hasAttacked = true,
-      onReleased: () => player.hasAttacked = false,
-      onCancelled: () => player.hasAttacked = false,
+      margin: const EdgeInsets.only(right: 140, bottom: 60),
+      onPressed: () => player.setAttack(true),
+      onReleased: () => player.setAttack(false),
+      onCancelled: () => player.setAttack(false),
+      scale: Vector2.all(1.5),
     );
 
     add(jumpButton);
     add(attackButton);
+  }
+
+  void openLevel(String levelName) {
+    showControls = Platform.isAndroid;
+
+    final level = Level(
+      levelName: levelName,
+      player: player,
+      enemies: enemies,
+    );
+
+    cam.world = level;
+
+    cam.viewfinder.anchor = Anchor.center;
+
+    cam.follow(player);
+
+    add(level);
+
+    if (showControls) {
+      _addJoystick();
+      _addMobileButtons();
+    }
   }
 }

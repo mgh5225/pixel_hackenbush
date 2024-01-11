@@ -17,10 +17,23 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "Big Banner (guide).tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Buttons.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "Enemies.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "Menu.tsx": {
+            "dynamicWrapping": true
         },
         "Platforms (32x32).tsx": {
             "dynamicWrapping": false,
@@ -33,19 +46,28 @@
             "scaleInEditor": 1
         },
         "Terrain and Back Wall (32x32).tsx": {
+            "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "level01.tmx": {
-            "scale": 1,
-            "selectedLayer": 4,
+            "scale": 0.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 245.5,
-                "y": 507
+                "x": 621,
+                "y": 420
             }
         },
         "level01.tmx#pixel_hackenbush_decoration": {
             "scaleInDock": 1
+        },
+        "menu.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 156.33333333333331,
+                "y": 149.33333333333331
+            }
         },
         "pixel_hackenbush.tsx": {
             "scaleInDock": 0.5,
@@ -56,8 +78,10 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "/home/patrick/Documents/Projects/pixel_hackenbush/assets/images/Totems/Head 3",
+    "last.imagePath": "/home/patrick/Documents/Projects/pixel_hackenbush/assets/images/UI/Yellow Button",
+    "map.height": 10,
     "map.lastUsedFormat": "tmx",
+    "map.width": 10,
     "openFiles": [
         "level01.tmx",
         "Terrain (32x32).tsx",
@@ -67,12 +91,14 @@
     ],
     "project": "pixel_hackenbush.tiled-project",
     "recentFiles": [
-        "Enemies.tsx",
-        "Background.tsx",
-        "Platforms (32x32).tsx",
-        "Terrain and Back Wall (32x32).tsx",
+        "Buttons.tsx",
+        "Big Banner (guide).tsx",
         "Terrain (32x32).tsx",
+        "Terrain and Back Wall (32x32).tsx",
+        "Platforms (32x32).tsx",
+        "Background.tsx",
         "level01.tmx",
+        "Enemies.tsx",
         "pixel_hackenbush.tsx",
         "pixel_hackenbush_decoration.tsx"
     ],

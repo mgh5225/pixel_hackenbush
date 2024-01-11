@@ -96,9 +96,8 @@ class Player extends SpriteAnimationGroupComponent
     horizontalMovement += isLeftKeyPressed ? -1 : 0;
     horizontalMovement += isRightKeyPressed ? 1 : 0;
 
-    hasJumped = keysPressed.contains(LogicalKeyboardKey.space);
-    hasAttacked = keysPressed.contains(LogicalKeyboardKey.enter);
-    canAttack = canAttack || !keysPressed.contains(LogicalKeyboardKey.enter);
+    setJump(keysPressed.contains(LogicalKeyboardKey.space));
+    setAttack(keysPressed.contains(LogicalKeyboardKey.enter));
 
     return super.onKeyEvent(event, keysPressed);
   }
@@ -342,5 +341,14 @@ class Player extends SpriteAnimationGroupComponent
   void _onAttackCompleted() {
     canChangeAnimation = true;
     canAttack = !hasAttacked;
+  }
+
+  void setJump(bool jump) {
+    hasJumped = jump;
+  }
+
+  void setAttack(bool attack) {
+    hasAttacked = attack;
+    canAttack = canAttack || !hasAttacked;
   }
 }

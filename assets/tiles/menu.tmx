@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="9">
+ <tileset firstgid="1" source="Background.tsx"/>
+ <tileset firstgid="20" source="Menu.tsx"/>
+ <tileset firstgid="69" source="Terrain (32x32).tsx"/>
+ <layer id="1" name="Background" width="10" height="10">
+  <data encoding="csv">
+87,87,87,87,87,87,87,87,87,87,
+87,87,87,87,87,87,87,87,87,87,
+87,87,87,87,87,87,87,87,87,87,
+87,87,87,87,87,87,87,87,87,87,
+87,87,87,87,87,87,87,87,87,87,
+87,87,87,87,87,87,87,87,87,87,
+87,87,87,87,87,87,87,87,87,87,
+87,87,87,87,87,87,87,87,87,87,
+87,87,87,87,87,87,87,87,87,87,
+87,87,87,87,87,87,87,87,87,87
+</data>
+ </layer>
+ <layer id="4" name="Decoration" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="3" name="Menu" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,20,50,50,50,50,50,50,21,0,
+0,22,51,51,51,51,51,51,23,0,
+0,28,51,51,51,51,51,51,29,0,
+0,28,51,51,51,51,51,51,23,0,
+0,22,51,51,51,51,51,51,23,0,
+0,22,51,51,51,51,51,51,29,0,
+0,22,51,51,51,51,51,51,23,0,
+0,30,52,52,52,52,52,52,31,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="6" name="Buttons" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="5" name="Buttons">
+  <object id="1" name="Play" x="62" y="64" width="196" height="42"/>
+  <object id="3" name="14" type="Icon" x="96" y="192" width="28" height="28"/>
+  <object id="7" name="Settings" x="62" y="128" width="196" height="42"/>
+  <object id="8" name="19" type="Icon" x="196" y="192" width="28" height="28"/>
+ </objectgroup>
+</map>
