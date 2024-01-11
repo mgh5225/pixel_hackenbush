@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
+import 'package:flame/text.dart';
 import 'package:flutter/services.dart';
 import 'package:pixel_hackenbush/components/collision_block.dart';
 import 'package:pixel_hackenbush/components/enemy.dart';
@@ -24,8 +25,15 @@ enum PlayerState {
 
 class Player extends SpriteAnimationGroupComponent
     with HasGameRef<PixelHackenbush>, KeyboardHandler, CollisionCallbacks {
+  final int id;
   final String character;
-  Player({required this.character, position}) : super(position: position);
+  String tagName;
+  Player({
+    required this.id,
+    required this.character,
+    required this.tagName,
+    position,
+  }) : super(position: position);
 
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation runAnimation;
@@ -42,6 +50,8 @@ class Player extends SpriteAnimationGroupComponent
   final double _jumpForce = 300;
   final double _terminalVelocity = 300;
   final double _attackRange = 20;
+
+  late final TextComponent _tag;
 
   double horizontalMovement = 0.0;
   double moveSpeed = 100;
@@ -73,6 +83,26 @@ class Player extends SpriteAnimationGroupComponent
 
     priority = 1;
 
+    final minecraft = TextPaint(
+      style: TextStyle(
+        color: game.backgroundColors[PixelColors.light],
+        fontFamily: 'Minecraft',
+        fontSize: 10,
+      ),
+    );
+
+    _tag = TextComponent(
+      text: tagName,
+      textRenderer: minecraft,
+      anchor: Anchor.center,
+      position: Vector2(
+        width / 2,
+        -hitbox.offsetY / 2,
+      ),
+    );
+
+    add(_tag);
+
     return super.onLoad();
   }
 
@@ -86,6 +116,8 @@ class Player extends SpriteAnimationGroupComponent
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+    if (id != game.activePlayer) return super.onKeyEvent(event, keysPressed);
+
     horizontalMovement = 0;
 
     final isLeftKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyA) ||
@@ -270,8 +302,10 @@ class Player extends SpriteAnimationGroupComponent
 
     if (velocity.x < 0 && scale.x > 0) {
       flipHorizontally();
+      _tag.flipHorizontally();
     } else if (velocity.x > 0 && scale.x < 0) {
       flipHorizontally();
+      _tag.flipHorizontally();
     }
 
     if (velocity.x > 0 || velocity.x < 0) {

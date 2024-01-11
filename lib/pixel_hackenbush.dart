@@ -11,7 +11,7 @@ import 'package:pixel_hackenbush/components/menu.dart';
 import 'package:pixel_hackenbush/components/player.dart';
 import 'package:pixel_hackenbush/components/level.dart';
 
-enum PixelColors { dark }
+enum PixelColors { dark, light }
 
 class PixelHackenbush extends FlameGame
     with HasKeyboardHandlerComponents, DragCallbacks, HasCollisionDetection {
@@ -19,12 +19,18 @@ class PixelHackenbush extends FlameGame
 
   final backgroundColors = {
     PixelColors.dark: const Color(0xff33323d),
+    PixelColors.light: const Color(0xffe0ac74),
   };
 
   @override
   Color backgroundColor() => backgroundColors[PixelColors.dark]!;
 
-  Player player = Player(character: 'Character');
+  List<Player> players = [
+    Player(id: 0, character: 'Character', tagName: 'Player 1'),
+    Player(id: 1, character: 'Character', tagName: 'Player 2')
+  ];
+  int activePlayer = 0;
+
   Map<int, Enemy> enemies = {};
   late JoystickComponent joystick;
   late HudButtonComponent jumpButton;
@@ -86,15 +92,15 @@ class PixelHackenbush extends FlameGame
       case JoystickDirection.left:
       case JoystickDirection.upLeft:
       case JoystickDirection.downLeft:
-        player.horizontalMovement = -1;
+        players[activePlayer].horizontalMovement = -1;
         break;
       case JoystickDirection.right:
       case JoystickDirection.upRight:
       case JoystickDirection.downRight:
-        player.horizontalMovement = 1;
+        players[activePlayer].horizontalMovement = 1;
         break;
       default:
-        player.horizontalMovement = 0;
+        players[activePlayer].horizontalMovement = 0;
     }
   }
 
@@ -106,9 +112,9 @@ class PixelHackenbush extends FlameGame
         ),
       ),
       margin: const EdgeInsets.only(right: 100, bottom: 100),
-      onPressed: () => player.setJump(true),
-      onReleased: () => player.setJump(false),
-      onCancelled: () => player.setJump(false),
+      onPressed: () => players[activePlayer].setJump(true),
+      onReleased: () => players[activePlayer].setJump(false),
+      onCancelled: () => players[activePlayer].setJump(false),
       scale: Vector2.all(1.5),
     );
     attackButton = HudButtonComponent(
@@ -118,9 +124,9 @@ class PixelHackenbush extends FlameGame
         ),
       ),
       margin: const EdgeInsets.only(right: 140, bottom: 60),
-      onPressed: () => player.setAttack(true),
-      onReleased: () => player.setAttack(false),
-      onCancelled: () => player.setAttack(false),
+      onPressed: () => players[activePlayer].setAttack(true),
+      onReleased: () => players[activePlayer].setAttack(false),
+      onCancelled: () => players[activePlayer].setAttack(false),
       scale: Vector2.all(1.5),
     );
 
@@ -133,15 +139,13 @@ class PixelHackenbush extends FlameGame
 
     final level = Level(
       levelName: levelName,
-      player: player,
-      enemies: enemies,
     );
 
     cam.world = level;
 
     cam.viewfinder.anchor = Anchor.center;
 
-    cam.follow(player);
+    cam.follow(players[activePlayer], maxSpeed: 100);
 
     add(level);
 
@@ -149,5 +153,12 @@ class PixelHackenbush extends FlameGame
       _addJoystick();
       _addMobileButtons();
     }
+  }
+
+  void changePlayer() {
+    activePlayer += 1;
+    activePlayer %= players.length;
+
+    cam.follow(players[activePlayer], maxSpeed: 100);
   }
 }

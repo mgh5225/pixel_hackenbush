@@ -4,16 +4,12 @@ import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:pixel_hackenbush/components/collision_block.dart';
 import 'package:pixel_hackenbush/components/enemy.dart';
-import 'package:pixel_hackenbush/components/player.dart';
+import 'package:pixel_hackenbush/pixel_hackenbush.dart';
 
-class Level extends World {
+class Level extends World with HasGameRef<PixelHackenbush> {
   final String levelName;
-  final Player player;
-  final Map<int, Enemy> enemies;
   Level({
     required this.levelName,
-    required this.player,
-    required this.enemies,
   });
 
   late TiledComponent level;
@@ -37,11 +33,13 @@ class Level extends World {
       for (final spawnPoint in spawnPointsLayer.objects) {
         switch (spawnPoint.class_) {
           case 'Player':
-            player.position = Vector2(
+            final playerId = spawnPoint.properties.getValue<int>('PlayerID');
+            game.players[playerId ?? 0].position = Vector2(
               spawnPoint.x,
               spawnPoint.y,
             );
-            add(player);
+            game.players[playerId ?? 0].tagName = spawnPoint.name;
+            add(game.players[playerId ?? 0]);
             break;
           case 'Enemy':
             final enemyTypeStr = spawnPoint.properties.getValue<String>('Type');
@@ -87,7 +85,7 @@ class Level extends World {
               ),
               topId: topId,
             );
-            enemies[spawnPoint.id] = enemy;
+            game.enemies[spawnPoint.id] = enemy;
             add(enemy);
             break;
         }

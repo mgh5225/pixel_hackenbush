@@ -163,6 +163,7 @@ class Enemy extends SpriteAnimationGroupComponent
     }
 
     game.enemies.remove(id);
+    game.changePlayer();
     removeFromParent();
   }
 }
