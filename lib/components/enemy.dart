@@ -155,21 +155,28 @@ class Enemy extends SpriteAnimationGroupComponent
     }
   }
 
-  void hit() {
-    if (canHit) {
+  void hit({bool isHitByPlayer = true}) {
+    if (canHit &&
+        (enemyType.index == game.getActivePlayer().id || !isHitByPlayer)) {
       current = EnemyState.hit;
       canHit = false;
     }
   }
 
   void kill() {
-    if (topId != null && world.enemies.containsKey(topId)) {
-      world.enemies[topId]!.hit();
-    } else {
-      game.changePlayer();
-    }
-
     world.enemies.remove(id);
+    world.removeTarget(enemyType.index);
+
+    if (topId != null && world.enemies.containsKey(topId)) {
+      world.enemies[topId]!.hit(isHitByPlayer: false);
+    } else {
+      final int? idx = world.getNextPlayer();
+      if (idx != null) {
+        game.setActivePlayer(idx);
+      } else {
+        world.setWinner(game.getActivePlayer().id);
+      }
+    }
     removeFromParent();
   }
 }

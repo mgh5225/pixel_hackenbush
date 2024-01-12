@@ -56,8 +56,8 @@
             "scale": 0.75,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 687.3333333333333,
-                "y": 375.99999999999994
+                "x": 495.3333333333333,
+                "y": 320
             }
         },
         "level01.tmx#pixel_hackenbush_decoration": {
@@ -70,8 +70,8 @@
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 105.5,
-                "y": 152
+                "x": 131,
+                "y": 160
             }
         },
         "pixel_hackenbush.tsx": {

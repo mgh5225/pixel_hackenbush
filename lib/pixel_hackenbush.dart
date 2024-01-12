@@ -27,7 +27,8 @@ class PixelHackenbush extends FlameGame
 
   List<Player> players = [
     Player(id: 0, character: 'Character', tagName: 'Player 1'),
-    Player(id: 1, character: 'Character', tagName: 'Player 2')
+    Player(id: 1, character: 'Character', tagName: 'Player 2'),
+    Player(id: 2, character: 'Character', tagName: 'Player 3'),
   ];
   int activePlayer = 0;
 
@@ -154,8 +155,13 @@ class PixelHackenbush extends FlameGame
     }
   }
 
-  void changePlayer() {
-    activePlayer += 1;
+  Player getNextPlayer(int idx) {
+    final nextIdx = (idx + 1) % players.length;
+    return players[nextIdx];
+  }
+
+  void setActivePlayer(int idx) {
+    activePlayer = idx;
     activePlayer %= players.length;
 
     cam.follow(getActivePlayer(), maxSpeed: 100);

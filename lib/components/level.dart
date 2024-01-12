@@ -14,6 +14,7 @@ class Level extends World with HasGameRef<PixelHackenbush> {
 
   late TiledComponent level;
   Map<int, Enemy> enemies = {};
+  Map<int, int> targets = {};
 
   @override
   FutureOr<void> onLoad() async {
@@ -88,6 +89,7 @@ class Level extends World with HasGameRef<PixelHackenbush> {
               topId: topId,
             );
             enemies[spawnPoint.id] = enemy;
+            addTarget(enemy.enemyType.index);
             add(enemy);
             break;
         }
@@ -118,5 +120,48 @@ class Level extends World with HasGameRef<PixelHackenbush> {
         }
       }
     }
+  }
+
+  int? getNextPlayer() {
+    int? nextIdx;
+    int idx = -1;
+    final currentIdx = game.getActivePlayer().id;
+
+    while (idx != currentIdx) {
+      if (idx == -1) {
+        idx = game.getNextPlayer(currentIdx).id;
+      } else {
+        idx = game.getNextPlayer(idx).id;
+      }
+      if (getTarget(idx) > 0) {
+        nextIdx = idx;
+        break;
+      }
+    }
+    return nextIdx;
+  }
+
+  int getTarget(int idx) {
+    return targets[idx] ?? 0;
+  }
+
+  void addTarget(int idx) {
+    if (targets.containsKey(idx)) {
+      targets[idx] = targets[idx]! + 1;
+    } else {
+      targets[idx] = 1;
+    }
+  }
+
+  void removeTarget(int idx) {
+    if (targets.containsKey(idx)) {
+      targets[idx] = targets[idx]! - 1;
+    } else {
+      targets[idx] = 0;
+    }
+  }
+
+  void setWinner(int idx) {
+    print(idx);
   }
 }
