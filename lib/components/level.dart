@@ -6,7 +6,7 @@ import 'package:pixel_hackenbush/components/collision_block.dart';
 import 'package:pixel_hackenbush/components/enemy.dart';
 import 'package:pixel_hackenbush/pixel_hackenbush.dart';
 
-class Level extends World with HasGameRef<PixelHackenbush> {
+class Level extends World with HasGameReference<PixelHackenbush> {
   final String levelName;
   Level({
     required this.levelName,

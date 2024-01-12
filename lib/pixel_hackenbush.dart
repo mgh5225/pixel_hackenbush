@@ -24,12 +24,16 @@ class PixelHackenbush extends FlameGame
   @override
   Color backgroundColor() => backgroundColors[PixelColors.dark]!;
 
-  List<Player> players = [
+  final List<Player> players = [
     Player(id: 0, character: 'Character', tagName: 'Player 1'),
     Player(id: 1, character: 'Character', tagName: 'Player 2'),
     Player(id: 2, character: 'Character', tagName: 'Player 3'),
   ];
   int activePlayer = 0;
+
+  final List<String> levels = [
+    'level01',
+  ];
 
   late JoystickComponent joystick;
   late HudButtonComponent jumpButton;
@@ -133,12 +137,25 @@ class PixelHackenbush extends FlameGame
     add(attackButton);
   }
 
-  void openLevel(String levelName) {
+  void openMenu(String menuName, {int pageIdx = 0}) {
+    removeAll(children.where((c) => c is Menu || c is Level));
+    showControls = false;
+    final menu = Menu(menuName: menuName, pageIdx: pageIdx);
+
+    cam.world = menu;
+
+    cam.viewfinder.anchor = Anchor.topLeft;
+
+    add(menu);
+  }
+
+  void openLevel(int idx) {
+    idx %= levels.length;
+
+    removeAll(children.where((c) => c is Menu || c is Level));
     showControls = Platform.isAndroid;
 
-    final level = Level(
-      levelName: levelName,
-    );
+    final level = Level(levelName: levels[idx]);
 
     cam.world = level;
 

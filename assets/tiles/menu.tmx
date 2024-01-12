@@ -17,20 +17,6 @@
 87,87,87,87,87,87,87,87,87,87
 </data>
  </layer>
- <layer id="4" name="Decoration" width="10" height="10">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
  <layer id="3" name="Menu" width="10" height="10">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
@@ -45,24 +31,30 @@
 0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="6" name="Buttons" width="10" height="10">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
  <objectgroup id="5" name="Buttons">
-  <object id="1" name="Play" x="62" y="64" width="196" height="42"/>
-  <object id="3" name="14" type="Icon" x="96" y="192" width="28" height="28"/>
-  <object id="7" name="Settings" x="62" y="128" width="196" height="42"/>
-  <object id="8" name="19" type="Icon" x="196" y="192" width="28" height="28"/>
+  <object id="1" name="Play" x="62" y="64" width="196" height="42">
+   <properties>
+    <property name="Action" value="levels"/>
+    <property name="ActionType" value="Menu"/>
+   </properties>
+  </object>
+  <object id="3" name="14" type="Icon" x="96" y="192" width="28" height="28">
+   <properties>
+    <property name="Action" value="sound"/>
+    <property name="ActionType" value="Toggle"/>
+   </properties>
+  </object>
+  <object id="7" name="Settings" x="62" y="128" width="196" height="42">
+   <properties>
+    <property name="Action" value="settings"/>
+    <property name="ActionType" value="Menu"/>
+   </properties>
+  </object>
+  <object id="8" name="19" type="Icon" x="196" y="192" width="28" height="28">
+   <properties>
+    <property name="Action" value="https://mgh5225.github.io"/>
+    <property name="ActionType" value="Url"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

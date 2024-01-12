@@ -14,7 +14,7 @@ enum EnemyState { idle, hit }
 
 class Enemy extends SpriteAnimationGroupComponent
     with
-        HasGameRef<PixelHackenbush>,
+        HasGameReference<PixelHackenbush>,
         CollisionCallbacks,
         HasWorldReference<Level> {
   final int id;

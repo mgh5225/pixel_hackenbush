@@ -24,7 +24,10 @@ enum PlayerState {
 }
 
 class Player extends SpriteAnimationGroupComponent
-    with HasGameRef<PixelHackenbush>, KeyboardHandler, CollisionCallbacks {
+    with
+        HasGameReference<PixelHackenbush>,
+        KeyboardHandler,
+        CollisionCallbacks {
   final int id;
   final String character;
   String tagName;

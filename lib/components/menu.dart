@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flame/components.dart';
 import 'package:flame/image_composition.dart';
 import 'package:flame/input.dart';
@@ -7,20 +8,27 @@ import 'package:flame/text.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:pixel_hackenbush/pixel_hackenbush.dart';
 
-class Menu extends World with HasGameRef<PixelHackenbush> {
+class Menu extends World with HasGameReference<PixelHackenbush> {
   final String menuName;
+  final int pageIdx;
 
   Menu({
     required this.menuName,
+    this.pageIdx = 0,
   });
 
   late TiledComponent menu;
+
+  final int maxLevelsPerPage = 12;
+  int totalLevels = 0;
 
   @override
   FutureOr<void> onLoad() async {
     menu = await TiledComponent.load('$menuName.tmx', Vector2.all(32));
 
     add(menu);
+
+    totalLevels = pageIdx * maxLevelsPerPage;
 
     _addButtons();
 
@@ -42,6 +50,10 @@ class Menu extends World with HasGameRef<PixelHackenbush> {
       for (final button in buttonsLayer.objects) {
         late Component child;
 
+        final action = button.properties.getValue<String>('Action');
+        final actionType = button.properties.getValue<String>('ActionType');
+        final actionMode = button.properties.getValue<String>('ActionMode');
+
         switch (button.class_) {
           case 'Icon':
             child = SpriteComponent(
@@ -56,8 +68,14 @@ class Menu extends World with HasGameRef<PixelHackenbush> {
             );
             break;
           default:
+            String name = button.name;
+
+            if (actionType == 'Level') {
+              name = '${int.parse(name) + pageIdx * maxLevelsPerPage}';
+            }
+
             child = TextComponent(
-              text: button.name,
+              text: name,
               textRenderer: minecraft,
               anchor: Anchor.center,
               position: Vector2(
@@ -76,9 +94,47 @@ class Menu extends World with HasGameRef<PixelHackenbush> {
             ),
             position: Vector2(button.x, button.y),
             children: [child],
-            onPressed: () {
-              if (button.name == 'Play') game.openLevel('level01');
+            onPressed: () async {
+              if (actionType == 'Menu') game.openMenu(action!);
+              if (actionType == 'Url') {
+                final uri = Uri.parse(action!);
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri);
+                }
+              }
+              if (actionType == 'Level') {
+                final levelIdx = int.parse(button.name) + pageIdx;
+                game.openLevel(levelIdx);
+              }
+              if (actionType == 'Page') {
+                if (actionMode == 'Prev') {
+                  game.openMenu(
+                    action!,
+                    pageIdx: pageIdx - 1,
+                  );
+                }
+                if (actionMode == 'Next') {
+                  game.openMenu(
+                    action!,
+                    pageIdx: pageIdx + 1,
+                  );
+                }
+              }
             });
+
+        if (actionType == 'Level') {
+          if (totalLevels == game.levels.length) continue;
+          totalLevels += 1;
+        }
+
+        if (actionType == 'Page') {
+          if (actionMode == 'Prev' && pageIdx == 0) continue;
+          if (actionMode == 'Next' &&
+              pageIdx == game.levels.length ~/ maxLevelsPerPage) {
+            continue;
+          }
+        }
+
         add(btn);
       }
     }

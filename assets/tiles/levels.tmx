@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="19">
+ <tileset firstgid="1" source="Background.tsx"/>
+ <tileset firstgid="20" source="Terrain (32x32).tsx"/>
+ <tileset firstgid="105" source="Menu.tsx"/>
+ <layer id="1" name="Background" width="10" height="10">
+  <data encoding="csv">
+38,38,38,38,38,38,38,38,38,38,
+38,38,38,38,38,38,38,38,38,38,
+38,38,38,38,38,38,38,38,38,38,
+38,38,38,38,38,38,38,38,38,38,
+38,38,38,38,38,38,38,38,38,38,
+38,38,38,38,38,38,38,38,38,38,
+38,38,38,38,38,38,38,38,38,38,
+38,38,38,38,38,38,38,38,38,38,
+38,38,38,38,38,38,38,38,38,38,
+38,38,38,38,38,38,38,38,38,38
+</data>
+ </layer>
+ <layer id="3" name="Menu" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,105,135,135,135,135,135,135,106,0,
+0,107,136,136,136,136,136,136,114,0,
+0,113,136,136,136,136,136,136,108,0,
+0,107,136,136,136,136,136,136,108,0,
+0,113,136,136,136,136,136,136,114,0,
+0,107,136,136,136,136,136,136,114,0,
+0,113,136,136,136,136,136,136,108,0,
+0,115,137,137,137,137,137,137,116,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="4" name="Buttons">
+  <object id="1" name="1" x="64" y="64" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="5" name="2" x="114" y="64" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="6" name="3" x="164" y="64" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="7" name="4" x="214" y="64" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="8" name="5" x="64" y="114" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="9" name="6" x="114" y="114.5" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="10" name="7" x="164" y="114" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="11" name="8" x="214" y="114" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="12" name="9" x="64" y="164" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="13" name="10" x="114" y="164" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="14" name="11" x="164" y="164" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="15" name="12" x="214" y="164" width="42" height="42">
+   <properties>
+    <property name="ActionType" value="Level"/>
+   </properties>
+  </object>
+  <object id="16" name="15" type="Icon" x="64" y="224" width="28" height="28">
+   <properties>
+    <property name="Action" value="menu"/>
+    <property name="ActionType" value="Menu"/>
+   </properties>
+  </object>
+  <object id="17" name="1" type="Icon" x="196" y="224" width="28" height="28">
+   <properties>
+    <property name="Action" value="levels"/>
+    <property name="ActionMode" value="Prev"/>
+    <property name="ActionType" value="Page"/>
+   </properties>
+  </object>
+  <object id="18" name="2" type="Icon" x="228" y="224" width="28" height="28">
+   <properties>
+    <property name="Action" value="levels"/>
+    <property name="ActionMode" value="Next"/>
+    <property name="ActionType" value="Page"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
