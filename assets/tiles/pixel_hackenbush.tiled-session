@@ -84,7 +84,7 @@
                 4
             ],
             "scale": 0.5,
-            "selectedLayer": 4,
+            "selectedLayer": 5,
             "viewCenter": {
                 "x": 329,
                 "y": 138
@@ -92,6 +92,18 @@
         },
         "level01.tmx#pixel_hackenbush_decoration": {
             "scaleInDock": 1
+        },
+        "level02.tmx": {
+            "expandedObjectLayers": [
+                3,
+                4
+            ],
+            "scale": 1,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 360.5,
+                "y": 163
+            }
         },
         "levels.tmx": {
             "expandedObjectLayers": [
@@ -145,7 +157,7 @@
     "last.imagePath": "/home/patrick/Documents/Projects/pixel_hackenbush/assets/images/UI/Yellow Button",
     "map.height": 10,
     "map.lastUsedFormat": "tmx",
-    "map.width": 10,
+    "map.width": 30,
     "openFiles": [
         "level01.tmx",
         "menu.tmx",
@@ -155,6 +167,7 @@
     "project": "pixel_hackenbush.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "level02.tmx",
         "levels/level01.tmx",
         "/home/patrick/Documents/Projects/pixel_hackenbush/assets/levels/level01.tmx",
         "level01.tmx",
@@ -165,8 +178,7 @@
         "Big Banner (guide).tsx",
         "Terrain (32x32).tsx",
         "Platforms (32x32).tsx",
-        "Background.tsx",
-        "Enemies.tsx"
+        "Background.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.type": 1

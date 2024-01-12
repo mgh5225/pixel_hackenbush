@@ -103,7 +103,8 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
                 }
               }
               if (actionType == 'Level') {
-                final levelIdx = int.parse(button.name) + pageIdx;
+                final levelIdx =
+                    int.parse(button.name) + pageIdx * maxLevelsPerPage - 1;
                 game.openLevel(levelIdx);
               }
               if (actionType == 'Page') {

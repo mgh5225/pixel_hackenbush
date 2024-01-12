@@ -33,6 +33,7 @@ class PixelHackenbush extends FlameGame
 
   final List<String> levels = [
     'level01',
+    'level02',
   ];
 
   late JoystickComponent joystick;

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="30" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="49">
+ <tileset firstgid="1" source="Terrain and Back Wall (32x32).tsx"/>
+ <layer id="1" name="Background" width="30" height="10">
+  <data encoding="csv">
+41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,
+41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,
+41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,
+41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,
+41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,
+41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,
+41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,
+41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,
+41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,
+41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41
+</data>
+ </layer>
+ <layer id="2" name="Tiles" width="30" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,27,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,60,28,0,0,
+0,0,42,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,40,0,0,
+0,0,42,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,40,0,0,
+0,0,42,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,155,40,0,0,
+0,0,46,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,47,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="SpawnPoints">
+  <object id="20" name="Player 01" type="Player" x="128" y="160" width="58" height="58">
+   <properties>
+    <property name="PlayerID" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="21" name="Enemy" type="Enemy" x="672" y="164" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="22"/>
+    <property name="Type" value="Head 2"/>
+   </properties>
+  </object>
+  <object id="22" name="Enemy" type="Enemy" x="672" y="144" width="20" height="20">
+   <properties>
+    <property name="Position" value="Top"/>
+    <property name="Type" value="Head 1"/>
+   </properties>
+  </object>
+  <object id="23" name="Enemy" type="Enemy" x="672" y="184" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="21"/>
+    <property name="Type" value="Head 3"/>
+   </properties>
+  </object>
+  <object id="24" name="Enemy" type="Enemy" x="672" y="204" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="23"/>
+    <property name="Type" value="Head 2"/>
+   </properties>
+  </object>
+  <object id="25" name="Enemy" type="Enemy" x="608" y="164" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="26"/>
+    <property name="Type" value="Head 1"/>
+   </properties>
+  </object>
+  <object id="26" name="Enemy" type="Enemy" x="608" y="144" width="20" height="20">
+   <properties>
+    <property name="Position" value="Top"/>
+    <property name="Type" value="Head 3"/>
+   </properties>
+  </object>
+  <object id="27" name="Enemy" type="Enemy" x="608" y="184" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="25"/>
+    <property name="Type" value="Head 3"/>
+   </properties>
+  </object>
+  <object id="28" name="Enemy" type="Enemy" x="608" y="204" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="27"/>
+    <property name="Type" value="Head 2"/>
+   </properties>
+  </object>
+  <object id="29" name="Player 02" type="Player" x="192" y="160" width="58" height="58">
+   <properties>
+    <property name="PlayerID" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="30" name="Player 03" type="Player" x="256" y="160" width="58" height="58">
+   <properties>
+    <property name="PlayerID" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="31" name="Enemy" type="Enemy" x="736" y="164" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="32"/>
+    <property name="Type" value="Head 1"/>
+   </properties>
+  </object>
+  <object id="32" name="Enemy" type="Enemy" x="736" y="144" width="20" height="20">
+   <properties>
+    <property name="Position" value="Top"/>
+    <property name="Type" value="Head 2"/>
+   </properties>
+  </object>
+  <object id="33" name="Enemy" type="Enemy" x="736" y="184" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="31"/>
+    <property name="Type" value="Head 2"/>
+   </properties>
+  </object>
+  <object id="34" name="Enemy" type="Enemy" x="736" y="204" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="33"/>
+    <property name="Type" value="Head 1"/>
+   </properties>
+  </object>
+  <object id="35" name="Enemy" type="Enemy" x="816" y="164" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="36"/>
+    <property name="Type" value="Head 1"/>
+   </properties>
+  </object>
+  <object id="36" name="Enemy" type="Enemy" x="816" y="144" width="20" height="20">
+   <properties>
+    <property name="Position" value="Top"/>
+    <property name="Type" value="Head 2"/>
+   </properties>
+  </object>
+  <object id="37" name="Enemy" type="Enemy" x="816" y="184" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="35"/>
+    <property name="Type" value="Head 2"/>
+   </properties>
+  </object>
+  <object id="38" name="Enemy" type="Enemy" x="816" y="204" width="20" height="20">
+   <properties>
+    <property name="Position" value="Middle"/>
+    <property name="TopID" type="int" value="37"/>
+    <property name="Type" value="Head 3"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="4" name="Collisions">
+  <object id="45" x="64" y="96" width="832" height="32"/>
+  <object id="46" x="64" y="224" width="832" height="32"/>
+  <object id="47" x="864" y="128" width="32" height="96"/>
+  <object id="48" x="64" y="128" width="32" height="96"/>
+ </objectgroup>
+</map>
