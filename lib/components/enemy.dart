@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:pixel_hackenbush/components/hitbox.dart';
+import 'package:pixel_hackenbush/components/level.dart';
 import 'package:pixel_hackenbush/pixel_hackenbush.dart';
 
 enum EnemyType { head_1, head_2, head_3 }
@@ -12,7 +13,10 @@ enum EnemyPositionType { head, middle }
 enum EnemyState { idle, hit }
 
 class Enemy extends SpriteAnimationGroupComponent
-    with HasGameRef<PixelHackenbush>, CollisionCallbacks {
+    with
+        HasGameRef<PixelHackenbush>,
+        CollisionCallbacks,
+        HasWorldReference<Level> {
   final int id;
   final EnemyType enemyType;
   final EnemyPositionType enemyPositionType;
@@ -24,7 +28,8 @@ class Enemy extends SpriteAnimationGroupComponent
     required this.enemyPositionType,
     this.topId,
     position,
-  }) : super(position: position);
+    priority,
+  }) : super(position: position, priority: priority);
 
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation hitAnimation;
@@ -158,12 +163,13 @@ class Enemy extends SpriteAnimationGroupComponent
   }
 
   void kill() {
-    if (topId != null && game.enemies.containsKey(topId)) {
-      game.enemies[topId]!.hit();
+    if (topId != null && world.enemies.containsKey(topId)) {
+      world.enemies[topId]!.hit();
+    } else {
+      game.changePlayer();
     }
 
-    game.enemies.remove(id);
-    game.changePlayer();
+    world.enemies.remove(id);
     removeFromParent();
   }
 }

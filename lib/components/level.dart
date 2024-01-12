@@ -13,6 +13,7 @@ class Level extends World with HasGameRef<PixelHackenbush> {
   });
 
   late TiledComponent level;
+  Map<int, Enemy> enemies = {};
 
   @override
   FutureOr<void> onLoad() async {
@@ -39,6 +40,7 @@ class Level extends World with HasGameRef<PixelHackenbush> {
               spawnPoint.y,
             );
             game.players[playerId ?? 0].tagName = spawnPoint.name;
+            game.players[playerId ?? 0].priority = 1;
             add(game.players[playerId ?? 0]);
             break;
           case 'Enemy':
@@ -85,7 +87,7 @@ class Level extends World with HasGameRef<PixelHackenbush> {
               ),
               topId: topId,
             );
-            game.enemies[spawnPoint.id] = enemy;
+            enemies[spawnPoint.id] = enemy;
             add(enemy);
             break;
         }

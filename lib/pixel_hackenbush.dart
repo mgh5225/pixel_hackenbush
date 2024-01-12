@@ -31,7 +31,6 @@ class PixelHackenbush extends FlameGame
   ];
   int activePlayer = 0;
 
-  Map<int, Enemy> enemies = {};
   late JoystickComponent joystick;
   late HudButtonComponent jumpButton;
   late HudButtonComponent attackButton;
@@ -92,15 +91,15 @@ class PixelHackenbush extends FlameGame
       case JoystickDirection.left:
       case JoystickDirection.upLeft:
       case JoystickDirection.downLeft:
-        players[activePlayer].horizontalMovement = -1;
+        getActivePlayer().horizontalMovement = -1;
         break;
       case JoystickDirection.right:
       case JoystickDirection.upRight:
       case JoystickDirection.downRight:
-        players[activePlayer].horizontalMovement = 1;
+        getActivePlayer().horizontalMovement = 1;
         break;
       default:
-        players[activePlayer].horizontalMovement = 0;
+        getActivePlayer().horizontalMovement = 0;
     }
   }
 
@@ -112,9 +111,9 @@ class PixelHackenbush extends FlameGame
         ),
       ),
       margin: const EdgeInsets.only(right: 100, bottom: 100),
-      onPressed: () => players[activePlayer].setJump(true),
-      onReleased: () => players[activePlayer].setJump(false),
-      onCancelled: () => players[activePlayer].setJump(false),
+      onPressed: () => getActivePlayer().setJump(true),
+      onReleased: () => getActivePlayer().setJump(false),
+      onCancelled: () => getActivePlayer().setJump(false),
       scale: Vector2.all(1.5),
     );
     attackButton = HudButtonComponent(
@@ -124,9 +123,9 @@ class PixelHackenbush extends FlameGame
         ),
       ),
       margin: const EdgeInsets.only(right: 140, bottom: 60),
-      onPressed: () => players[activePlayer].setAttack(true),
-      onReleased: () => players[activePlayer].setAttack(false),
-      onCancelled: () => players[activePlayer].setAttack(false),
+      onPressed: () => getActivePlayer().setAttack(true),
+      onReleased: () => getActivePlayer().setAttack(false),
+      onCancelled: () => getActivePlayer().setAttack(false),
       scale: Vector2.all(1.5),
     );
 
@@ -145,7 +144,7 @@ class PixelHackenbush extends FlameGame
 
     cam.viewfinder.anchor = Anchor.center;
 
-    cam.follow(players[activePlayer], maxSpeed: 100);
+    cam.follow(getActivePlayer(), maxSpeed: 100);
 
     add(level);
 
@@ -159,6 +158,10 @@ class PixelHackenbush extends FlameGame
     activePlayer += 1;
     activePlayer %= players.length;
 
-    cam.follow(players[activePlayer], maxSpeed: 100);
+    cam.follow(getActivePlayer(), maxSpeed: 100);
+  }
+
+  Player getActivePlayer() {
+    return players[activePlayer];
   }
 }

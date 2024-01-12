@@ -33,7 +33,8 @@ class Player extends SpriteAnimationGroupComponent
     required this.character,
     required this.tagName,
     position,
-  }) : super(position: position);
+    priority,
+  }) : super(position: position, priority: priority);
 
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation runAnimation;
@@ -81,8 +82,6 @@ class Player extends SpriteAnimationGroupComponent
       (hitbox.height + hitbox.offsetY) / height,
     );
 
-    priority = 1;
-
     final minecraft = TextPaint(
       style: TextStyle(
         color: game.backgroundColors[PixelColors.light],
@@ -116,20 +115,23 @@ class Player extends SpriteAnimationGroupComponent
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    if (id != game.activePlayer) return super.onKeyEvent(event, keysPressed);
-
     horizontalMovement = 0;
+    game.getActivePlayer().horizontalMovement = 0;
 
     final isLeftKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyA) ||
         keysPressed.contains(LogicalKeyboardKey.arrowLeft);
     final isRightKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyD) ||
         keysPressed.contains(LogicalKeyboardKey.arrowRight);
 
-    horizontalMovement += isLeftKeyPressed ? -1 : 0;
-    horizontalMovement += isRightKeyPressed ? 1 : 0;
+    game.getActivePlayer().horizontalMovement += isLeftKeyPressed ? -1 : 0;
+    game.getActivePlayer().horizontalMovement += isRightKeyPressed ? 1 : 0;
 
-    setJump(keysPressed.contains(LogicalKeyboardKey.space));
-    setAttack(keysPressed.contains(LogicalKeyboardKey.enter));
+    game
+        .getActivePlayer()
+        .setJump(keysPressed.contains(LogicalKeyboardKey.space));
+    game
+        .getActivePlayer()
+        .setAttack(keysPressed.contains(LogicalKeyboardKey.enter));
 
     return super.onKeyEvent(event, keysPressed);
   }
