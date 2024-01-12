@@ -39,6 +39,7 @@ class PixelHackenbush extends FlameGame
   late JoystickComponent joystick;
   late HudButtonComponent jumpButton;
   late HudButtonComponent attackButton;
+  late HudButtonComponent homeButton;
   bool showControls = false;
 
   @override
@@ -138,12 +139,28 @@ class PixelHackenbush extends FlameGame
     add(attackButton);
   }
 
+  void _addHomeButton() {
+    homeButton = HudButtonComponent(
+      button: SpriteComponent(
+        sprite: Sprite(
+          images.fromCache('HUD/X.png'),
+        ),
+      ),
+      margin: const EdgeInsets.only(top: 32, left: 32),
+      onPressed: () => openMenu('menu'),
+      scale: Vector2.all(1.5),
+    );
+    add(homeButton);
+  }
+
   void openMenu(String menuName, {int pageIdx = 0}) {
-    removeAll(children.where((c) => c is Menu || c is Level));
+    removeAll(children.where((c) => c is! CameraComponent));
     showControls = false;
     final menu = Menu(menuName: menuName, pageIdx: pageIdx);
 
     cam.world = menu;
+
+    cam.moveTo(Vector2.zero());
 
     cam.viewfinder.anchor = Anchor.topLeft;
 
@@ -151,9 +168,10 @@ class PixelHackenbush extends FlameGame
   }
 
   void openLevel(int idx) {
+    removeAll(children.where((c) => c is! CameraComponent));
+
     idx %= levels.length;
 
-    removeAll(children.where((c) => c is Menu || c is Level));
     showControls = Platform.isAndroid;
 
     final level = Level(levelName: levels[idx]);
@@ -170,6 +188,8 @@ class PixelHackenbush extends FlameGame
       _addJoystick();
       _addMobileButtons();
     }
+
+    _addHomeButton();
   }
 
   Player getNextPlayer(int idx) {

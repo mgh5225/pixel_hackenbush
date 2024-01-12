@@ -98,11 +98,11 @@
                 3,
                 4
             ],
-            "scale": 1,
+            "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 360.5,
-                "y": 163
+                "x": 686.25,
+                "y": 222.5
             }
         },
         "levels.tmx": {
