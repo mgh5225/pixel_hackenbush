@@ -154,8 +154,8 @@ class PixelHackenbush extends FlameGame
   }
 
   void openMenu(String menuName, {int pageIdx = 0}) {
-    removeAll(children.where((c) => c is! CameraComponent));
-    showControls = false;
+    reset();
+
     final menu = Menu(menuName: menuName, pageIdx: pageIdx);
 
     cam.world = menu;
@@ -168,7 +168,7 @@ class PixelHackenbush extends FlameGame
   }
 
   void openLevel(int idx) {
-    removeAll(children.where((c) => c is! CameraComponent));
+    reset();
 
     idx %= levels.length;
 
@@ -208,5 +208,11 @@ class PixelHackenbush extends FlameGame
 
   Player getActivePlayer() {
     return players[activePlayer];
+  }
+
+  void reset() {
+    removeAll(children.where((c) => c is! CameraComponent));
+    showControls = false;
+    activePlayer = 0;
   }
 }
