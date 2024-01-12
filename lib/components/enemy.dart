@@ -36,7 +36,7 @@ class Enemy extends SpriteAnimationGroupComponent
   late RectHitbox hitbox;
   final double stepTime = 0.05;
 
-  bool canHit = true;
+  static bool canHit = true;
 
   @override
   FutureOr<void> onLoad() {
@@ -156,8 +156,8 @@ class Enemy extends SpriteAnimationGroupComponent
   }
 
   void hit({bool isHitByPlayer = true}) {
-    if (canHit &&
-        (enemyType.index == game.getActivePlayer().id || !isHitByPlayer)) {
+    if ((canHit && enemyType.index == game.getActivePlayer().id) ||
+        !isHitByPlayer) {
       current = EnemyState.hit;
       canHit = false;
     }
@@ -173,6 +173,7 @@ class Enemy extends SpriteAnimationGroupComponent
       final int? idx = world.getNextPlayer();
       if (idx != null) {
         game.setActivePlayer(idx);
+        canHit = true;
       } else {
         world.setWinner(game.getActivePlayer().id);
       }
