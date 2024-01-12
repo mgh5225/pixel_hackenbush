@@ -98,9 +98,7 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
               if (actionType == 'Menu') game.openMenu(action!);
               if (actionType == 'Url') {
                 final uri = Uri.parse(action!);
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri);
-                }
+                await launchUrl(uri);
               }
               if (actionType == 'Level') {
                 final levelIdx =
