@@ -6,6 +6,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
+import 'package:pixel_hackenbush/components/enemy.dart';
 import 'package:pixel_hackenbush/components/menu.dart';
 import 'package:pixel_hackenbush/components/player.dart';
 import 'package:pixel_hackenbush/components/level.dart';
@@ -214,5 +215,6 @@ class PixelHackenbush extends FlameGame
     removeAll(children.where((c) => c is! CameraComponent));
     showControls = false;
     activePlayer = 0;
+    Enemy.canHit = true;
   }
 }
