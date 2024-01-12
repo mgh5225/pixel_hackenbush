@@ -118,7 +118,6 @@ class Player extends SpriteAnimationGroupComponent
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    horizontalMovement = 0;
     game.getActivePlayer().horizontalMovement = 0;
 
     final isLeftKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyA) ||
@@ -389,5 +388,11 @@ class Player extends SpriteAnimationGroupComponent
   void setAttack(bool attack) {
     hasAttacked = attack;
     canAttack = canAttack || !hasAttacked;
+  }
+
+  void stop() {
+    horizontalMovement = 0;
+    setJump(false);
+    setAttack(false);
   }
 }

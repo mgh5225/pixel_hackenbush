@@ -198,6 +198,8 @@ class PixelHackenbush extends FlameGame
   }
 
   void setActivePlayer(int idx) {
+    getActivePlayer().stop();
+
     activePlayer = idx;
     activePlayer %= players.length;
 
