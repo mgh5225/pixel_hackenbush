@@ -80,8 +80,8 @@
         },
         "level01.tmx": {
             "expandedObjectLayers": [
-                5,
-                4
+                4,
+                5
             ],
             "scale": 0.5,
             "selectedLayer": 5,
@@ -95,8 +95,8 @@
         },
         "level02.tmx": {
             "expandedObjectLayers": [
-                4,
-                3
+                3,
+                4
             ],
             "scale": 2,
             "selectedLayer": 2,
@@ -112,8 +112,8 @@
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 228.25,
-                "y": 123
+                "x": 160,
+                "y": 160
             }
         },
         "levels/Background.tsx": {
@@ -156,8 +156,8 @@
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 109.25,
-                "y": 194.5
+                "x": 108.75,
+                "y": 194
             }
         }
     },

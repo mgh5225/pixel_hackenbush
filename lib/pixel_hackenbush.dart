@@ -11,10 +11,16 @@ import 'package:pixel_hackenbush/components/menu.dart';
 import 'package:pixel_hackenbush/components/player.dart';
 import 'package:pixel_hackenbush/components/level.dart';
 
+import 'storage.dart';
+
 enum PixelColors { dark, light }
 
 class PixelHackenbush extends FlameGame
     with HasKeyboardHandlerComponents, DragCallbacks, HasCollisionDetection {
+  final Storage storage;
+
+  PixelHackenbush({required this.storage}) : super();
+
   final backgroundColors = {
     PixelColors.dark: const Color(0xff33323d),
     PixelColors.light: const Color(0xffe0ac74),
@@ -37,6 +43,7 @@ class PixelHackenbush extends FlameGame
   ];
 
   int activeLevel = 0;
+  bool isMuted = false;
 
   late JoystickComponent joystick;
   late HudButtonComponent jumpButton;
@@ -52,6 +59,8 @@ class PixelHackenbush extends FlameGame
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
+
+    _loadFromStorage();
 
     final mainMenu = Menu(menuName: 'menu');
 
@@ -164,6 +173,11 @@ class PixelHackenbush extends FlameGame
     add(homeButton);
   }
 
+  void _loadFromStorage() {
+    activeLevel = storage.activeLevel;
+    isMuted = storage.isMuted;
+  }
+
   void openMenu(
     String menuName, {
     int pageIdx = 0,
@@ -189,8 +203,10 @@ class PixelHackenbush extends FlameGame
     add(menu);
   }
 
-  void openLevel(int idx) {
+  void openLevel({int? idx}) {
     reset();
+
+    idx ??= activeLevel;
 
     setActiveLevel(idx);
 
@@ -229,6 +245,8 @@ class PixelHackenbush extends FlameGame
   void setActiveLevel(int idx) {
     activeLevel = idx;
     activeLevel %= levels.length;
+
+    storage.setActiveLevel(activeLevel);
   }
 
   String getActiveLevel() {
@@ -278,5 +296,15 @@ class PixelHackenbush extends FlameGame
 
   void resume() {
     isGamePaused = false;
+  }
+
+  void mute() {
+    isMuted = true;
+    storage.setIsMuted(isMuted);
+  }
+
+  void unmute() {
+    isMuted = false;
+    storage.setIsMuted(isMuted);
   }
 }

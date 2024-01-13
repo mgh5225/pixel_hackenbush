@@ -48,7 +48,7 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
 
     if (buttonsLayer != null) {
       for (final object in buttonsLayer.objects) {
-        late Component child;
+        late PositionComponent child1, child2;
 
         final action = object.properties.getValue<String>('Action');
         final actionType = object.properties.getValue<String>('ActionType');
@@ -68,9 +68,26 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
             add(text);
             continue;
           case 'Icon':
-            child = SpriteComponent(
-              sprite: Sprite(game.images
-                  .fromCache('UI/Small Text/Small Icons/${object.name}.png')),
+            String icon = object.name;
+            if (actionType == 'Toggle') {
+              final icons = object.name.split(',');
+              icon = icons[0];
+
+              child2 = SpriteComponent(
+                sprite: Sprite(game.images
+                    .fromCache('UI/Small Text/Small Icons/${icons[1]}.png')),
+                anchor: Anchor.center,
+                position: Vector2(
+                  object.width / 2,
+                  object.height / 2,
+                ),
+                scale: Vector2.all(2),
+              );
+            }
+
+            child1 = SpriteComponent(
+              sprite: Sprite(
+                  game.images.fromCache('UI/Small Text/Small Icons/$icon.png')),
               anchor: Anchor.center,
               position: Vector2(
                 object.width / 2,
@@ -86,7 +103,7 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
               name = '${int.parse(name) + pageIdx * maxLevelsPerPage}';
             }
 
-            child = TextComponent(
+            child1 = TextComponent(
               text: name,
               textRenderer: minecraft,
               anchor: Anchor.center,
@@ -97,44 +114,87 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
             );
         }
 
-        final btn = SpriteButtonComponent(
-            button: Sprite(
-              _createButton(
-                object.width ~/ 14 - 1,
-                object.height ~/ 14 - 1,
-              ),
-            ),
-            position: Vector2(object.x, object.y),
-            children: [child],
-            onPressed: () async {
-              if (actionType == 'Menu') game.openMenu(action!);
-              if (actionType == 'Url') {
-                final uri = Uri.parse(action!);
-                await launchUrl(uri);
-              }
-              if (actionType == 'Level') {
-                final levelIdx =
-                    int.parse(object.name) + pageIdx * maxLevelsPerPage - 1;
-                game.openLevel(levelIdx);
-              }
-              if (actionType == 'Page') {
-                if (actionMode == 'Prev') {
-                  game.openMenu(
-                    action!,
-                    pageIdx: pageIdx - 1,
-                  );
-                }
-                if (actionMode == 'Next') {
-                  game.openMenu(
-                    action!,
-                    pageIdx: pageIdx + 1,
-                  );
-                }
-              }
-              if (actionType == 'Continue') {
-                game.openLevel(game.getNextLevel());
-              }
-            });
+        late PositionComponent btn;
+
+        switch (actionType) {
+          case 'Toggle':
+            bool flip = false;
+            if (actionMode == 'Sound') {
+              flip = !game.isMuted;
+            }
+
+            btn = ToggleButtonComponent(
+                position: Vector2(object.x, object.y),
+                defaultSkin: SpriteComponent(
+                  sprite: Sprite(
+                    _createButtonUI(
+                      object.width ~/ 14 - 1,
+                      object.height ~/ 14 - 1,
+                    ),
+                  ),
+                ),
+                defaultSelectedSkin: SpriteComponent(
+                  sprite: Sprite(
+                    _createButtonUI(
+                      object.width ~/ 14 - 1,
+                      object.height ~/ 14 - 1,
+                    ),
+                  ),
+                ),
+                defaultLabel: flip ? child2 : child1,
+                defaultSelectedLabel: flip ? child1 : child2,
+                onPressed: () {
+                  if (actionMode == 'Sound') {
+                    if (game.isMuted) {
+                      game.unmute();
+                    } else {
+                      game.mute();
+                    }
+                  }
+                });
+
+            break;
+          default:
+            btn = SpriteButtonComponent(
+                button: Sprite(
+                  _createButtonUI(
+                    object.width ~/ 14 - 1,
+                    object.height ~/ 14 - 1,
+                  ),
+                ),
+                position: Vector2(object.x, object.y),
+                children: [child1],
+                onPressed: () async {
+                  if (actionType == 'Play') game.openLevel();
+                  if (actionType == 'Menu') game.openMenu(action!);
+                  if (actionType == 'Url') {
+                    final uri = Uri.parse(action!);
+                    await launchUrl(uri);
+                  }
+                  if (actionType == 'Level') {
+                    final levelIdx =
+                        int.parse(object.name) + pageIdx * maxLevelsPerPage - 1;
+                    game.openLevel(idx: levelIdx);
+                  }
+                  if (actionType == 'Page') {
+                    if (actionMode == 'Prev') {
+                      game.openMenu(
+                        action!,
+                        pageIdx: pageIdx - 1,
+                      );
+                    }
+                    if (actionMode == 'Next') {
+                      game.openMenu(
+                        action!,
+                        pageIdx: pageIdx + 1,
+                      );
+                    }
+                  }
+                  if (actionType == 'Continue') {
+                    game.openLevel(idx: game.getNextLevel());
+                  }
+                });
+        }
 
         if (actionType == 'Level') {
           if (totalLevels == game.levels.length) continue;
@@ -154,7 +214,7 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
     }
   }
 
-  Image _createButton(int width, int height) {
+  Image _createButtonUI(int width, int height) {
     final buttonComposImage = ImageComposition()
       ..add(
         game.images.fromCache('UI/Yellow Button/8.png'),
