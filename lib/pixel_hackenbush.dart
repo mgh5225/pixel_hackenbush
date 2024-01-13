@@ -45,6 +45,7 @@ class PixelHackenbush extends FlameGame
   bool showControls = false;
 
   late CameraComponent overlayCamera;
+  late CameraComponent gameCamera;
 
   @override
   FutureOr<void> onLoad() async {
@@ -52,7 +53,7 @@ class PixelHackenbush extends FlameGame
 
     world = Menu(menuName: 'menu');
 
-    camera = CameraComponent.withFixedResolution(
+    gameCamera = CameraComponent.withFixedResolution(
       world: world,
       width: 320,
       height: 320,
@@ -62,15 +63,10 @@ class PixelHackenbush extends FlameGame
       height: 320,
     );
 
-    camera.viewfinder.anchor = Anchor.topLeft;
+    gameCamera.viewfinder.anchor = Anchor.topLeft;
     overlayCamera.viewfinder.anchor = Anchor.topLeft;
 
-    if (showControls) {
-      _addJoystick();
-      _addMobileButtons();
-    }
-
-    addAll([camera, overlayCamera]);
+    addAll([gameCamera, overlayCamera]);
 
     return super.onLoad();
   }
@@ -125,7 +121,7 @@ class PixelHackenbush extends FlameGame
           images.fromCache('HUD/A.png'),
         ),
       ),
-      margin: const EdgeInsets.only(right: 100, bottom: 100),
+      margin: const EdgeInsets.only(right: 80, bottom: 80),
       onPressed: () => getActivePlayer().setJump(true),
       onReleased: () => getActivePlayer().setJump(false),
       onCancelled: () => getActivePlayer().setJump(false),
@@ -137,7 +133,7 @@ class PixelHackenbush extends FlameGame
           images.fromCache('HUD/B.png'),
         ),
       ),
-      margin: const EdgeInsets.only(right: 140, bottom: 60),
+      margin: const EdgeInsets.only(right: 32, bottom: 32),
       onPressed: () => getActivePlayer().setAttack(true),
       onReleased: () => getActivePlayer().setAttack(false),
       onCancelled: () => getActivePlayer().setAttack(false),
@@ -176,11 +172,11 @@ class PixelHackenbush extends FlameGame
     if (!isOverlay) {
       reset();
 
-      camera.world = menu;
+      gameCamera.world = menu;
 
-      camera.moveTo(Vector2.zero());
+      gameCamera.moveTo(Vector2.zero());
 
-      camera.viewfinder.anchor = Anchor.topLeft;
+      gameCamera.viewfinder.anchor = Anchor.topLeft;
     } else {
       overlayCamera.world = menu;
     }
@@ -192,15 +188,15 @@ class PixelHackenbush extends FlameGame
 
     setActiveLevel(idx);
 
-    showControls = Platform.isAndroid;
+    showControls = Platform.isAndroid || true;
 
     final level = Level(levelName: getActiveLevel());
 
-    camera.world = level;
+    gameCamera.world = level;
 
-    camera.viewfinder.anchor = Anchor.center;
+    gameCamera.viewfinder.anchor = Anchor.center;
 
-    camera.follow(getActivePlayer(), maxSpeed: 100);
+    gameCamera.follow(getActivePlayer(), maxSpeed: 100);
 
     add(level);
 
@@ -239,7 +235,7 @@ class PixelHackenbush extends FlameGame
     activePlayer = idx;
     activePlayer %= players.length;
 
-    camera.follow(getActivePlayer(), maxSpeed: 100);
+    gameCamera.follow(getActivePlayer(), maxSpeed: 100);
   }
 
   Player getActivePlayer() {
@@ -250,6 +246,7 @@ class PixelHackenbush extends FlameGame
     removeAll(children.where((c) => c is! CameraComponent));
     showControls = false;
     activePlayer = 0;
+    winnerPlayer = null;
     Enemy.canHit = true;
   }
 
