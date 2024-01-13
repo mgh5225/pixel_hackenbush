@@ -51,10 +51,10 @@ class PixelHackenbush extends FlameGame
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
 
-    world = Menu(menuName: 'menu');
+    final mainMenu = Menu(menuName: 'menu');
 
     gameCamera = CameraComponent.withFixedResolution(
-      world: world,
+      world: mainMenu,
       width: 320,
       height: 320,
     );
@@ -66,7 +66,7 @@ class PixelHackenbush extends FlameGame
     gameCamera.viewfinder.anchor = Anchor.topLeft;
     overlayCamera.viewfinder.anchor = Anchor.topLeft;
 
-    addAll([gameCamera, overlayCamera]);
+    addAll([gameCamera, overlayCamera, mainMenu]);
 
     return super.onLoad();
   }
