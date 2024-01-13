@@ -10,6 +10,7 @@ import 'package:pixel_hackenbush/components/enemy.dart';
 import 'package:pixel_hackenbush/components/menu.dart';
 import 'package:pixel_hackenbush/components/player.dart';
 import 'package:pixel_hackenbush/components/level.dart';
+import 'package:pixel_hackenbush/sound.dart';
 
 import 'storage.dart';
 
@@ -56,9 +57,13 @@ class PixelHackenbush extends FlameGame
 
   bool isGamePaused = false;
 
+  Sound sound = Sound();
+
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
+
+    await sound.load();
 
     _loadFromStorage();
 
@@ -176,6 +181,8 @@ class PixelHackenbush extends FlameGame
   void _loadFromStorage() {
     activeLevel = storage.activeLevel;
     isMuted = storage.isMuted;
+
+    sound.playBackground(isMuted);
   }
 
   void openMenu(
@@ -301,10 +308,12 @@ class PixelHackenbush extends FlameGame
   void mute() {
     isMuted = true;
     storage.setIsMuted(isMuted);
+    sound.mute();
   }
 
   void unmute() {
     isMuted = false;
     storage.setIsMuted(isMuted);
+    sound.unmute();
   }
 }

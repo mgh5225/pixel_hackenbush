@@ -38,6 +38,7 @@ dependencies:
   flame_tiled: ^1.18.3
   url_launcher: ^6.2.3
   shared_preferences: ^2.2.2
+  flame_audio: ^2.1.7
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,7 @@ flutter:
     - assets/images/UI/Small Text/Small Icons/
     - assets/images/Backgrounds/
     - assets/tiles/
+    - assets/audio/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
