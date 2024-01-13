@@ -47,28 +47,40 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
     );
 
     if (buttonsLayer != null) {
-      for (final button in buttonsLayer.objects) {
+      for (final object in buttonsLayer.objects) {
         late Component child;
 
-        final action = button.properties.getValue<String>('Action');
-        final actionType = button.properties.getValue<String>('ActionType');
-        final actionMode = button.properties.getValue<String>('ActionMode');
+        final action = object.properties.getValue<String>('Action');
+        final actionType = object.properties.getValue<String>('ActionType');
+        final actionMode = object.properties.getValue<String>('ActionMode');
 
-        switch (button.class_) {
+        switch (object.class_) {
+          case 'Text':
+            final text = TextComponent(
+              text: game.getText(actionType!),
+              anchor: Anchor.center,
+              textRenderer: minecraft,
+              position: Vector2(
+                object.width / 2 + object.x,
+                object.height / 2 + object.y,
+              ),
+            );
+            add(text);
+            continue;
           case 'Icon':
             child = SpriteComponent(
               sprite: Sprite(game.images
-                  .fromCache('UI/Small Text/Small Icons/${button.name}.png')),
+                  .fromCache('UI/Small Text/Small Icons/${object.name}.png')),
               anchor: Anchor.center,
               position: Vector2(
-                button.width / 2,
-                button.height / 2,
+                object.width / 2,
+                object.height / 2,
               ),
               scale: Vector2.all(2),
             );
             break;
           default:
-            String name = button.name;
+            String name = object.name;
 
             if (actionType == 'Level') {
               name = '${int.parse(name) + pageIdx * maxLevelsPerPage}';
@@ -79,8 +91,8 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
               textRenderer: minecraft,
               anchor: Anchor.center,
               position: Vector2(
-                button.width / 2,
-                button.height / 2,
+                object.width / 2,
+                object.height / 2,
               ),
             );
         }
@@ -88,11 +100,11 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
         final btn = SpriteButtonComponent(
             button: Sprite(
               _createButton(
-                button.width ~/ 14 - 1,
-                button.height ~/ 14 - 1,
+                object.width ~/ 14 - 1,
+                object.height ~/ 14 - 1,
               ),
             ),
-            position: Vector2(button.x, button.y),
+            position: Vector2(object.x, object.y),
             children: [child],
             onPressed: () async {
               if (actionType == 'Menu') game.openMenu(action!);
@@ -102,7 +114,7 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
               }
               if (actionType == 'Level') {
                 final levelIdx =
-                    int.parse(button.name) + pageIdx * maxLevelsPerPage - 1;
+                    int.parse(object.name) + pageIdx * maxLevelsPerPage - 1;
                 game.openLevel(levelIdx);
               }
               if (actionType == 'Page') {
@@ -118,6 +130,9 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
                     pageIdx: pageIdx + 1,
                   );
                 }
+              }
+              if (actionType == 'Continue') {
+                game.openLevel(game.getNextLevel());
               }
             });
 

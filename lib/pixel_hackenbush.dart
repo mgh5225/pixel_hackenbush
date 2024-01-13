@@ -15,8 +15,6 @@ enum PixelColors { dark, light }
 
 class PixelHackenbush extends FlameGame
     with HasKeyboardHandlerComponents, DragCallbacks, HasCollisionDetection {
-  late final CameraComponent cam;
-
   final backgroundColors = {
     PixelColors.dark: const Color(0xff33323d),
     PixelColors.light: const Color(0xffe0ac74),
@@ -31,11 +29,14 @@ class PixelHackenbush extends FlameGame
     Player(id: 2, character: 'Character', tagName: 'Player 3'),
   ];
   int activePlayer = 0;
+  int? winnerPlayer;
 
   final List<String> levels = [
     'level01',
     'level02',
   ];
+
+  int activeLevel = 0;
 
   late JoystickComponent joystick;
   late HudButtonComponent jumpButton;
@@ -43,26 +44,33 @@ class PixelHackenbush extends FlameGame
   late HudButtonComponent homeButton;
   bool showControls = false;
 
+  late CameraComponent overlayCamera;
+
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
 
-    final world = Menu(menuName: 'menu');
+    world = Menu(menuName: 'menu');
 
-    cam = CameraComponent.withFixedResolution(
+    camera = CameraComponent.withFixedResolution(
       world: world,
       width: 320,
       height: 320,
     );
+    overlayCamera = CameraComponent.withFixedResolution(
+      width: 320,
+      height: 320,
+    );
 
-    cam.viewfinder.anchor = Anchor.topLeft;
-
-    addAll([cam, world]);
+    camera.viewfinder.anchor = Anchor.topLeft;
+    overlayCamera.viewfinder.anchor = Anchor.topLeft;
 
     if (showControls) {
       _addJoystick();
       _addMobileButtons();
     }
+
+    addAll([camera, overlayCamera]);
 
     return super.onLoad();
   }
@@ -154,34 +162,45 @@ class PixelHackenbush extends FlameGame
     add(homeButton);
   }
 
-  void openMenu(String menuName, {int pageIdx = 0}) {
-    reset();
+  void openMenu(
+    String menuName, {
+    int pageIdx = 0,
+    bool isOverlay = false,
+    String text = '',
+  }) {
+    final menu = Menu(
+      menuName: menuName,
+      pageIdx: pageIdx,
+    );
 
-    final menu = Menu(menuName: menuName, pageIdx: pageIdx);
+    if (!isOverlay) {
+      reset();
 
-    cam.world = menu;
+      camera.world = menu;
 
-    cam.moveTo(Vector2.zero());
+      camera.moveTo(Vector2.zero());
 
-    cam.viewfinder.anchor = Anchor.topLeft;
-
+      camera.viewfinder.anchor = Anchor.topLeft;
+    } else {
+      overlayCamera.world = menu;
+    }
     add(menu);
   }
 
   void openLevel(int idx) {
     reset();
 
-    idx %= levels.length;
+    setActiveLevel(idx);
 
     showControls = Platform.isAndroid;
 
-    final level = Level(levelName: levels[idx]);
+    final level = Level(levelName: getActiveLevel());
 
-    cam.world = level;
+    camera.world = level;
 
-    cam.viewfinder.anchor = Anchor.center;
+    camera.viewfinder.anchor = Anchor.center;
 
-    cam.follow(getActivePlayer(), maxSpeed: 100);
+    camera.follow(getActivePlayer(), maxSpeed: 100);
 
     add(level);
 
@@ -198,13 +217,29 @@ class PixelHackenbush extends FlameGame
     return players[nextIdx];
   }
 
+  int getNextLevel({int? idx}) {
+    idx ??= activeLevel;
+
+    final nextIdx = (idx + 1) % levels.length;
+    return nextIdx;
+  }
+
+  void setActiveLevel(int idx) {
+    activeLevel = idx;
+    activeLevel %= levels.length;
+  }
+
+  String getActiveLevel() {
+    return levels[activeLevel];
+  }
+
   void setActivePlayer(int idx) {
     getActivePlayer().stop();
 
     activePlayer = idx;
     activePlayer %= players.length;
 
-    cam.follow(getActivePlayer(), maxSpeed: 100);
+    camera.follow(getActivePlayer(), maxSpeed: 100);
   }
 
   Player getActivePlayer() {
@@ -216,5 +251,20 @@ class PixelHackenbush extends FlameGame
     showControls = false;
     activePlayer = 0;
     Enemy.canHit = true;
+  }
+
+  void setWinner(int idx) {
+    winnerPlayer = idx;
+  }
+
+  String getText(String actionType) {
+    if (actionType == 'Winner') {
+      if (winnerPlayer != null) {
+        return '${players[winnerPlayer!].tagName} Won!';
+      }
+      return 'Nobody Won!';
+    }
+
+    return 'Text Not Found';
   }
 }

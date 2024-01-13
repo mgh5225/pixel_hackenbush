@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "level01.tmx",
+    "activeFile": "win.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -61,7 +61,7 @@
         "Menu.tsx": {
             "dynamicWrapping": true,
             "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInEditor": 3
         },
         "Platforms (32x32).tsx": {
             "dynamicWrapping": false,
@@ -75,8 +75,8 @@
         },
         "Terrain and Back Wall (32x32).tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInDock": 0.75,
+            "scaleInEditor": 3
         },
         "level01.tmx": {
             "expandedObjectLayers": [
@@ -86,8 +86,8 @@
             "scale": 0.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 329,
-                "y": 138
+                "x": 372,
+                "y": 320
             }
         },
         "level01.tmx#pixel_hackenbush_decoration": {
@@ -95,14 +95,14 @@
         },
         "level02.tmx": {
             "expandedObjectLayers": [
-                3,
-                4
+                4,
+                3
             ],
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 686.25,
-                "y": 222.5
+                "x": 480,
+                "y": 160
             }
         },
         "levels.tmx": {
@@ -112,8 +112,8 @@
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 229.75,
-                "y": 184.5
+                "x": 228.25,
+                "y": 123
             }
         },
         "levels/Background.tsx": {
@@ -137,11 +137,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 104.5,
-                "y": 146
+                "x": 160,
+                "y": 160
             }
         },
         "pixel_hackenbush.tsx": {
@@ -151,34 +151,45 @@
         "pixel_hackenbush_decoration.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "win.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 109.25,
+                "y": 195
+            }
         }
     },
     "last.externalTilesetPath": "/home/patrick/Documents/Projects/pixel_hackenbush/assets/tiles",
-    "last.imagePath": "/home/patrick/Documents/Projects/pixel_hackenbush/assets/images/UI/Yellow Button",
+    "last.imagePath": "/home/patrick/Documents/Projects/pixel_hackenbush/assets/images/UI/Small Banner",
     "map.height": 10,
     "map.lastUsedFormat": "tmx",
-    "map.width": 30,
+    "map.width": 10,
     "openFiles": [
-        "level01.tmx",
-        "menu.tmx",
         "Menu.tsx",
-        "Terrain and Back Wall (32x32).tsx"
+        "Terrain and Back Wall (32x32).tsx",
+        "menu.tmx",
+        "levels.tmx",
+        "level01.tmx",
+        "level02.tmx",
+        "win.tmx"
     ],
     "project": "pixel_hackenbush.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "win.tmx",
+        "Menu.tsx",
+        "Terrain and Back Wall (32x32).tsx",
+        "menu.tmx",
+        "levels.tmx",
+        "level01.tmx",
         "level02.tmx",
         "levels/level01.tmx",
         "/home/patrick/Documents/Projects/pixel_hackenbush/assets/levels/level01.tmx",
-        "level01.tmx",
-        "Terrain and Back Wall (32x32).tsx",
-        "Menu.tsx",
-        "menu.tmx",
         "Buttons.tsx",
         "Big Banner (guide).tsx",
-        "Terrain (32x32).tsx",
-        "Platforms (32x32).tsx",
-        "Background.tsx"
+        "Terrain (32x32).tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.type": 1

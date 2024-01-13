@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="Menu" tilewidth="32" tileheight="32" tilecount="49" columns="0">
+<tileset version="1.10" tiledversion="1.10.2" name="Menu" tilewidth="32" tileheight="32" tilecount="62" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="32" height="32" source="../images/UI/Big Banner/1.png"/>
@@ -147,5 +147,44 @@
  </tile>
  <tile id="48">
   <image width="14" height="14" source="../images/UI/Yellow Button/16.png"/>
+ </tile>
+ <tile id="49">
+  <image width="32" height="32" source="../images/UI/Small Banner/1.png"/>
+ </tile>
+ <tile id="50">
+  <image width="32" height="32" source="../images/UI/Small Banner/2.png"/>
+ </tile>
+ <tile id="51">
+  <image width="32" height="32" source="../images/UI/Small Banner/3.png"/>
+ </tile>
+ <tile id="52">
+  <image width="32" height="32" source="../images/UI/Small Banner/4.png"/>
+ </tile>
+ <tile id="53">
+  <image width="32" height="32" source="../images/UI/Small Banner/5.png"/>
+ </tile>
+ <tile id="54">
+  <image width="32" height="32" source="../images/UI/Small Banner/6.png"/>
+ </tile>
+ <tile id="55">
+  <image width="32" height="32" source="../images/UI/Small Banner/7.png"/>
+ </tile>
+ <tile id="56">
+  <image width="32" height="32" source="../images/UI/Small Banner/8.png"/>
+ </tile>
+ <tile id="57">
+  <image width="32" height="32" source="../images/UI/Small Banner/9.png"/>
+ </tile>
+ <tile id="58">
+  <image width="32" height="32" source="../images/UI/Small Banner/10.png"/>
+ </tile>
+ <tile id="59">
+  <image width="32" height="32" source="../images/UI/Small Banner/11.png"/>
+ </tile>
+ <tile id="60">
+  <image width="32" height="32" source="../images/UI/Small Banner/12.png"/>
+ </tile>
+ <tile id="61">
+  <image width="32" height="32" source="../images/UI/Small Banner/13.png"/>
  </tile>
 </tileset>

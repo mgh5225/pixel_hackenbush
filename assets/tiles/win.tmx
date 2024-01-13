@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="4">
+ <tileset firstgid="1" source="Menu.tsx"/>
+ <layer id="1" name="Background" width="10" height="10">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,7,31,31,31,31,8,0,0,
+0,0,3,32,32,32,32,4,0,0,
+0,0,9,32,32,32,32,10,0,0,
+0,0,3,32,32,32,32,4,0,0,
+0,0,9,32,32,32,32,10,0,0,
+0,0,5,33,33,33,33,6,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="3" name="Buttons">
+  <object id="1" name="15" type="Icon" x="125" y="180" width="28" height="28">
+   <properties>
+    <property name="Action" value="menu"/>
+    <property name="ActionType" value="Menu"/>
+   </properties>
+  </object>
+  <object id="2" name="2" type="Icon" x="163" y="180" width="28" height="28">
+   <properties>
+    <property name="Action" value="levels"/>
+    <property name="ActionType" value="Continue"/>
+   </properties>
+  </object>
+  <object id="3" name="Text" type="Text" x="104" y="112" width="108" height="42">
+   <properties>
+    <property name="ActionType" value="Winner"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
