@@ -47,6 +47,8 @@ class PixelHackenbush extends FlameGame
   late CameraComponent overlayCamera;
   late CameraComponent gameCamera;
 
+  bool isGamePaused = false;
+
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
@@ -98,6 +100,9 @@ class PixelHackenbush extends FlameGame
   }
 
   void _readJoystick() {
+    getActivePlayer().horizontalMovement = 0;
+    if (isGamePaused) return;
+
     switch (joystick.direction) {
       case JoystickDirection.left:
       case JoystickDirection.upLeft:
@@ -110,7 +115,6 @@ class PixelHackenbush extends FlameGame
         getActivePlayer().horizontalMovement = 1;
         break;
       default:
-        getActivePlayer().horizontalMovement = 0;
     }
   }
 
@@ -122,7 +126,7 @@ class PixelHackenbush extends FlameGame
         ),
       ),
       margin: const EdgeInsets.only(right: 80, bottom: 80),
-      onPressed: () => getActivePlayer().setJump(true),
+      onPressed: () => getActivePlayer().setJump(!isGamePaused),
       onReleased: () => getActivePlayer().setJump(false),
       onCancelled: () => getActivePlayer().setJump(false),
       scale: Vector2.all(1.5),
@@ -134,7 +138,7 @@ class PixelHackenbush extends FlameGame
         ),
       ),
       margin: const EdgeInsets.only(right: 32, bottom: 32),
-      onPressed: () => getActivePlayer().setAttack(true),
+      onPressed: () => getActivePlayer().setAttack(!isGamePaused),
       onReleased: () => getActivePlayer().setAttack(false),
       onCancelled: () => getActivePlayer().setAttack(false),
       scale: Vector2.all(1.5),
@@ -152,7 +156,9 @@ class PixelHackenbush extends FlameGame
         ),
       ),
       margin: const EdgeInsets.only(top: 32, left: 32),
-      onPressed: () => openMenu('menu'),
+      onPressed: () {
+        if (!isGamePaused) openMenu('menu');
+      },
       scale: Vector2.all(1.5),
     );
     add(homeButton);
@@ -188,7 +194,7 @@ class PixelHackenbush extends FlameGame
 
     setActiveLevel(idx);
 
-    showControls = Platform.isAndroid || true;
+    showControls = Platform.isAndroid;
 
     final level = Level(levelName: getActiveLevel());
 
@@ -247,6 +253,7 @@ class PixelHackenbush extends FlameGame
     showControls = false;
     activePlayer = 0;
     winnerPlayer = null;
+    isGamePaused = false;
     Enemy.canHit = true;
   }
 
@@ -263,5 +270,13 @@ class PixelHackenbush extends FlameGame
     }
 
     return 'Text Not Found';
+  }
+
+  void pause() {
+    isGamePaused = true;
+  }
+
+  void resume() {
+    isGamePaused = false;
   }
 }

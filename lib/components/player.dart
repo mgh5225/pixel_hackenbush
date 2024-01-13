@@ -125,15 +125,15 @@ class Player extends SpriteAnimationGroupComponent
     final isRightKeyPressed = keysPressed.contains(LogicalKeyboardKey.keyD) ||
         keysPressed.contains(LogicalKeyboardKey.arrowRight);
 
-    game.getActivePlayer().horizontalMovement += isLeftKeyPressed ? -1 : 0;
-    game.getActivePlayer().horizontalMovement += isRightKeyPressed ? 1 : 0;
+    game.getActivePlayer().horizontalMovement +=
+        isLeftKeyPressed && !game.isGamePaused ? -1 : 0;
+    game.getActivePlayer().horizontalMovement +=
+        isRightKeyPressed && !game.isGamePaused ? 1 : 0;
 
-    game
-        .getActivePlayer()
-        .setJump(keysPressed.contains(LogicalKeyboardKey.space));
-    game
-        .getActivePlayer()
-        .setAttack(keysPressed.contains(LogicalKeyboardKey.enter));
+    game.getActivePlayer().setJump(
+        keysPressed.contains(LogicalKeyboardKey.space) && !game.isGamePaused);
+    game.getActivePlayer().setAttack(
+        keysPressed.contains(LogicalKeyboardKey.enter) && !game.isGamePaused);
 
     return super.onKeyEvent(event, keysPressed);
   }

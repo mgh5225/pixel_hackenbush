@@ -154,10 +154,10 @@
         },
         "win.tmx": {
             "scale": 2,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
                 "x": 109.25,
-                "y": 195
+                "y": 194.5
             }
         }
     },
@@ -178,13 +178,13 @@
     "project": "pixel_hackenbush.tiled-project",
     "property.type": "string",
     "recentFiles": [
-        "win.tmx",
         "Menu.tsx",
         "Terrain and Back Wall (32x32).tsx",
         "menu.tmx",
         "levels.tmx",
         "level01.tmx",
         "level02.tmx",
+        "win.tmx",
         "levels/level01.tmx",
         "/home/patrick/Documents/Projects/pixel_hackenbush/assets/levels/level01.tmx",
         "Buttons.tsx",

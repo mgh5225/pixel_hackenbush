@@ -163,6 +163,7 @@ class Level extends World with HasGameReference<PixelHackenbush> {
 
   void setWinner(int idx) {
     game.setWinner(idx);
+    game.pause();
     game.openMenu('win', isOverlay: true);
   }
 }
