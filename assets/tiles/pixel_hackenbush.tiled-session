@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "menu.tmx",
+    "activeFile": "win.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -153,11 +153,11 @@
             "scaleInEditor": 1
         },
         "win.tmx": {
-            "scale": 2,
+            "scale": 4,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 160,
-                "y": 160
+                "x": 174.875,
+                "y": 157.5
             }
         }
     },
@@ -180,11 +180,11 @@
     "recentFiles": [
         "Menu.tsx",
         "Terrain and Back Wall (32x32).tsx",
-        "win.tmx",
-        "level02.tmx",
-        "level01.tmx",
-        "levels.tmx",
         "menu.tmx",
+        "levels.tmx",
+        "level01.tmx",
+        "level02.tmx",
+        "win.tmx",
         "levels/level01.tmx",
         "/home/patrick/Documents/Projects/pixel_hackenbush/assets/levels/level01.tmx",
         "Buttons.tsx",
