@@ -143,7 +143,7 @@ class Menu extends World with HasGameReference<PixelHackenbush> {
                 ),
                 defaultLabel: flip ? child2 : child1,
                 defaultSelectedLabel: flip ? child1 : child2,
-                onPressed: () {
+                onSelectedChanged: (bool selected) {
                   if (actionMode == 'Sound') {
                     if (game.isMuted) {
                       game.unmute();

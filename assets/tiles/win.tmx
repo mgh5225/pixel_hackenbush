@@ -16,19 +16,19 @@
 </data>
  </layer>
  <objectgroup id="3" name="Buttons">
-  <object id="1" name="15" type="Icon" x="125" y="180" width="28" height="28">
+  <object id="1" name="15" type="Icon" x="128" y="180" width="28" height="28">
    <properties>
     <property name="Action" value="menu"/>
     <property name="ActionType" value="Menu"/>
    </properties>
   </object>
-  <object id="2" name="2" type="Icon" x="163" y="180" width="28" height="28">
+  <object id="2" name="2" type="Icon" x="164" y="180" width="28" height="28">
    <properties>
     <property name="Action" value="levels"/>
     <property name="ActionType" value="Continue"/>
    </properties>
   </object>
-  <object id="3" name="Text" type="Text" x="104" y="112" width="108" height="42">
+  <object id="3" name="Text" type="Text" x="106" y="112" width="108" height="42">
    <properties>
     <property name="ActionType" value="Winner"/>
    </properties>

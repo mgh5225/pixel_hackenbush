@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "win.tmx",
+    "activeFile": "menu.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -95,8 +95,8 @@
         },
         "level02.tmx": {
             "expandedObjectLayers": [
-                3,
-                4
+                4,
+                3
             ],
             "scale": 2,
             "selectedLayer": 2,
@@ -112,8 +112,8 @@
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 160,
-                "y": 160
+                "x": 159.75,
+                "y": 159.5
             }
         },
         "levels/Background.tsx": {
@@ -140,8 +140,8 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 160,
-                "y": 160
+                "x": 159,
+                "y": 158.66666666666669
             }
         },
         "pixel_hackenbush.tsx": {
@@ -156,8 +156,8 @@
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 108.75,
-                "y": 194
+                "x": 160,
+                "y": 160
             }
         }
     },
@@ -180,11 +180,11 @@
     "recentFiles": [
         "Menu.tsx",
         "Terrain and Back Wall (32x32).tsx",
-        "menu.tmx",
-        "levels.tmx",
-        "level01.tmx",
-        "level02.tmx",
         "win.tmx",
+        "level02.tmx",
+        "level01.tmx",
+        "levels.tmx",
+        "menu.tmx",
         "levels/level01.tmx",
         "/home/patrick/Documents/Projects/pixel_hackenbush/assets/levels/level01.tmx",
         "Buttons.tsx",
