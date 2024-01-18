@@ -13,6 +13,8 @@
 
 This repository contains a simple yet engaging implementation of the [Hackenbush](https://en.wikipedia.org/wiki/Hackenbush) game, built using the Flutter framework and the Flame game engine. It's designed to be both fun and easy to play, leveraging the capabilities of Flutter for cross-platform compatibility and Flame for a smooth gaming experience.
 
+> Access the full report by clicking [Report](https://github.com/mgh5225/pixel_hackenbush/blob/main/report/report.pdf).
+
 ## Requirements
 
 To get started with this game, ensure you have the following prerequisites installed:
