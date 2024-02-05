@@ -7,6 +7,7 @@
   - [Overview](#overview)
   - [Requirements](#requirements)
   - [Running the Game](#running-the-game)
+  - [Acknowledgement](#acknowledgement)
   - [License](#license)
 
 ## Overview
@@ -27,6 +28,10 @@ To get started with this game, ensure you have the following prerequisites insta
 Once you have the prerequisites in place, you can run the game on an emulator or physical device with the following command:
 
 `flutter run`
+
+## Acknowledgement
+
+I would like to extend my heartfelt thanks to [Spellthorn](https://github.com/Spellthorn) for providing an extensive tutorial on the Flame Engine, which has been incredibly helpful. Additionally, I want to acknowledge [Pixel Frog](https://pixelfrog-assets.itch.io) for offering the valuable assets that have greatly enhanced the development process.
 
 ## License
 
